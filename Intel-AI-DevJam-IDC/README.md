@@ -1,11 +1,12 @@
-# Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT
-## Intel AI DevJam Demo
+# Intel AI DevJam Demo
 
 ![Intel® Movidius](IDC-Classifier/images/IDC-Classification.jpg)
 
 ## Introduction
 
 The **Intel AI DevJam Demo** uses a **Windows application** to communicate with a **facial recognition classifier** and a classifier trained to detect **Invasive Ductal Carcinoma (Breast cancer)** in **histology images**. The project combines the  [Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT](https://github.com/iotJumpway/IoT-JumpWay-Intel-Examples/tree/master/Intel-Movidius/IDC-Classification "Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT") and [TASS Movidius Facenet Classifier](https://github.com/iotJumpway/IoT-JumpWay-Intel-Examples/tree/master/Intel-Movidius/TASS/Facenet "TASS Movidius Facenet Classifier") projects.
+
+![Intel® Movidius](IDC-Classifier/images/Movidius.jpg)
 
 **Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT** combines **Computer Vision** and the **Internet of Things** to provide a way to train a neural network with labelled breast cancer histology images to detect **Invasive Ductal Carcinoma (IDC)** in unseen/unlabelled images.
 
@@ -16,8 +17,6 @@ The **TASS Movidius Facenet Classifier** uses **Siamese Neural Networks** and **
 ## Bugs/Issues
 
 Please feel free to create issues for bugs and general issues you come across whilst using this or any other Intel® related IoT JumpWay issues. You may also use the issues area to ask for general help whilst using the IoT JumpWay in your IoT projects.
-
-![Intel® Movidius](IDC-Classifier/images/Movidius.jpg)
 
 ## Contributors
 
