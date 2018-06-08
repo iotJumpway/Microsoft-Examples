@@ -16,17 +16,17 @@ The **Intel AI DevJam Demo** uses a **Windows application** to communicate with 
 
 A **Windows Universal Application** allows training and querying the **IDC and facial recognition classifiers**, facial recognition training requires 1 image per person to be able to identify them. The **Windows Universal Application** also allows uploading **histology images** of **IDC** positive or negative slides for classification. 
 
-## Intel® Movidius
+## Intel® Movidius & UP2
 
 ![Intel® Movidius](IDC-Classifier/images/Movidius.jpg)
 
-For classification the project uses the **Intel® Movidius** and a custom trained **Facenet** to carry out **facial classification**, and a custom trained **Inception V3 model** for detecting **Invasive Ductal Carcinoma (IDC)**. 
+For classification the project uses the **Intel® Movidius** and a custom trained **Facenet** to carry out **facial classification**, and a custom trained **Inception V3 model** for detecting **Invasive Ductal Carcinoma (IDC)** homed on an **UP2**. 
 
 ![Intel® UP2](IDC-Classifier/images/UP2.jpg)
 
-The **TASS Movidius Facenet Classifier** uses **Siamese Neural Networks** and **Triplet Loss** to classify known and unknown faces, homed on an UP2.
+The **TASS Movidius Facenet Classifier** uses **Siamese Neural Networks** and **Triplet Loss** to classify known and unknown faces.
 
-## Linux  (Up2/Raspberry Pi 3)
+## Raspberry Pi 3
 
 For classification the project uses the **Intel® Movidius** and a custom trained **Facenet** to carry out **facial classification**, and a custom trained **Inception V3 model** for detecting **Invasive Ductal Carcinoma (IDC)**. IoT communication is powered by the [IoT JumpWay](https://iot.techbubbletechnologies.com "IoT JumpWay").
 
