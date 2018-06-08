@@ -12,9 +12,9 @@ A **Windows Universal Application** allows training and querying the **IDC and f
 
 ## Linux
 
-![Intel® Movidius](IDC-Classifier/images/Movidius.jpg)
-
 **Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT** combines **Computer Vision** and the **Internet of Things** to provide a way to train a neural network with labelled breast cancer histology images to detect **Invasive Ductal Carcinoma (IDC)** in unseen/unlabelled images.
+
+![Intel® Movidius](IDC-Classifier/images/Movidius.jpg)
 
 For classification the project uses the **Intel® Movidius** and a custom trained **Facenet** to carry out **facial classification**, and a custom trained **Inception V3 model** for detecting **Invasive Ductal Carcinoma (IDC)**. IoT communication is powered by the [IoT JumpWay](https://iot.techbubbletechnologies.com "IoT JumpWay").
 
