@@ -12,9 +12,9 @@ The **Intel AI DevJam Demo** uses a **Windows application** to communicate with 
 
 **IoT connectivity** for the project is provided by the [IoT JumpWay](https://www.iotjumpway.tech "IoT JumpWay"). The **IoT JumpWay** is an **IoT communication** platform as a service (PaaS) with a social network frontend. IoT JumpWay developers will soon be able to share projects/photos/videos and events. Use of the IoT JumpWay is completely free, you can find out more on the [Developer Program](https://iot.techbubbletechnologies.com/developers/ "Developer Program") page.
 
-## Windows Universal Application
+## Universal Windows Application
 
-A **Windows Universal Application** allows training and querying the **IDC and facial recognition classifiers**, facial recognition training requires 1 image per person to be able to identify them. The **Windows Universal Application** also allows uploading **histology images** of **IDC** positive or negative slides for classification. 
+A **Universal Windows Application** allows training and querying the **IDC and facial recognition classifiers**, facial recognition training requires 1 image per person to be able to identify them. The **Windows Universal Application** also allows uploading **histology images** of **IDC** positive or negative slides for classification. 
 
 ## Intel® Movidius & UP2
 
@@ -26,14 +26,17 @@ For classification the project uses the **Intel® Movidius** and a custom traine
 
 The **TASS Movidius Facenet Classifier** uses **Siamese Neural Networks** and **Triplet Loss** to classify known and unknown faces.
 
-## Raspberry Pi 3
+## Raspberry Pi 3b
 
-For classification the project uses the **Intel® Movidius** and a custom trained **Facenet** to carry out **facial classification**, and a custom trained **Inception V3 model** for detecting **Invasive Ductal Carcinoma (IDC)**. IoT communication is powered by the [IoT JumpWay](https://iot.techbubbletechnologies.com "IoT JumpWay").
+![Raspberry Pi 3b](IDC-Classifier/images/RPI3.jpg)
 
-The **TASS Movidius Facenet Classifier** uses **Siamese Neural Networks** and **Triplet Loss** to classify known and unknown faces. The project uses an UP2 the Intel Movidius and the IoT JumpWay for IoT connectivity.
+An IoT connected alarm awaits messages for the results of the **facial** and **IDC** classification. In the event an unauthorized user is detected or IDC is detected an alarm (buzzer) is triggered and a red LED lights up, if both classifications are ok a blue LED lights up. 
 
-## Tutorials
-[Invasive Ductal Carcinoma (Breast Cancer)](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier "Invasive Ductal Carcinoma (Breast Cancer)")
+## Tutorials & Source Codes
+
+- [Classifiers](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier "Classifiers")
+
+- Universal Windows Application (Coming Soon)
 
 ## Bugs/Issues
 
