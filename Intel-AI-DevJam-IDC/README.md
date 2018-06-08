@@ -13,27 +13,13 @@ For classification the project uses the **Intel® Movidius** and a custom traine
 
 The **TASS Movidius Facenet Classifier** uses **Siamese Neural Networks** and **Triplet Loss** to classify known and unknown faces. The project uses an UP2 the Intel Movidius and the IoT JumpWay for IoT connectivity.
 
-![Intel® Movidius](images/Movidius.jpg)
-
-## What Will We Do?
-
-1.  Install the [Intel® NCSDK](https://github.com/movidius/ncsdk "Intel® NCSDK") on a Linux development device.
-2.  Install the [Intel® NCSDK API](https://github.com/movidius/ncsdk "Intel® NCSDK API") on a Raspberry Pi 3 / UP Squared.
-3.  Install the [IoT JumpWay Python MQTT Client](https://github.com/AdamMiltonBarker/JumpWayMQTT "IoT JumpWay Python MQTT Client") on the Raspberry Pi / UP Squared and configure the IoT JumpWay.
-4.  Clone & Set Up The Repo.
-5.  Prepare your training dataset.
-6.  Finetuning your training parameters.
-7.  Train Inception V3 IDC Classification model on Intel® AI DevCloud.
-8.  Convert the model to a format suitable for the Movidius.
-9.  Test the IDC classifier locally on the Linux development device.
-10. Live IDC classification via the server / client.
-11. Build an IoT connected alarm that will be triggered when IDC is detected.
-
 ## Bugs/Issues
 
 Please feel free to create issues for bugs and general issues you come across whilst using this or any other Intel® related IoT JumpWay issues. You may also use the issues area to ask for general help whilst using the IoT JumpWay in your IoT projects.
 
+![Intel® Movidius](IDC-Classifier/images/Movidius.jpg)
+
 ## Contributors
 
-[![Adam Milton-Barker, Intel® Software Innovator](../../images/Intel-Software-Innovator.jpg)](https://github.com/AdamMiltonBarker)
+[![Adam Milton-Barker, Intel® Software Innovator](../images/Intel-Software-Innovator.jpg)](https://github.com/AdamMiltonBarker)
 
