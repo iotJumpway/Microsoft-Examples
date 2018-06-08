@@ -33,6 +33,17 @@ The **TASS Movidius Facenet Classifier** uses **Siamese Neural Networks** and **
 10. Live IDC classification via the server / client.
 11. Build an IoT connected alarm that will be triggered when IDC is detected.
 
+## Applications
+
+**Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT** is made up of 6 core applications:
+
+- **DevCloudTrainer:** A training program that allows you to train a convolutional neural network using Intel® AI DevCloud.
+- **Evaluator:** An evaluation program for evaluating your model.
+- **Classifier:** A classification program for testing your model.
+- **Server/API:** A server that powers a REST Api, providing access to the classifier.
+- **Universal Windows Application:** A Universal Windows Application for training, managing and querying (inference) The classifier server.
+- **IoT Connected Alarm:** An IoT connected alarm that is triggered when IDC or an unauthorized user is detected.
+
 # DISCLAIMER
 
 The purpose of the tutorial and source code for **Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT** is to help people learn how to create computer vision projects and for people interested in the medical use case evaluate if it may help them and to expand upon. Although the the program is fairly accurate in testing, this project is not meant to be an alternative for use instead of seeking professional help. I am a developer not a doctor or expert on cancer.
@@ -42,9 +53,7 @@ The purpose of the tutorial and source code for **Invasive Ductal Carcinoma (IDC
 
 ## Bugs/Issues
 
-Please feel free to create issues for bugs and general issues you come across whilst using this or any other IoT JumpWay Intel® repo issues:
-
-[IoT-JumpWay-Intel-Examples Github Issues](https://github.com/iotJumpway/IoT-JumpWay-Intel-Examples/issues "IoT-JumpWay-Intel-Examples Github Issues")
+Please feel free to create issues for bugs and general issues you come across whilst using this or any other IoT JumpWay Microsoft repo issues: [IoT-JumpWay-Microsoft-Examples Github Issues](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/issues "IoT-JumpWay-Microsoft-Examples Github Issues")
 
 ## Contributors
 
