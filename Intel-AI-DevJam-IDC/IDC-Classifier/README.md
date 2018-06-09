@@ -158,7 +158,7 @@ Follow the [IoT JumpWay Developer Program (BETA) Location Device Doc](https://gi
         "image_size":299,
         "num_classes":2,
         "num_epochs":60,
-        "dev_cloud_epochs":60,
+        "dev_cloud_epochs":40,
         "test_num_epochs":1,
         "batch_size":10,
         "test_batch_size":36,
@@ -168,7 +168,13 @@ Follow the [IoT JumpWay Developer Program (BETA) Location Device Doc](https://gi
         "NetworkPath":"",
         "InceptionImagePath":"model/test/",
         "InceptionThreshold": 0.54,
-        "InceptionGraph":"igraph"
+        "InceptionGraph":"model/idc.graph",
+        "InceptionGraphDevCloud":"model/idcdc.graph",
+        "Graph":"model/tass.graph",
+        "Dlib":"model/dlib/shape_predictor_68_face_landmarks.dat",
+        "dataset_dir":"model/train/",
+        "TestingPath":"data/testing/",
+        "ValidPath":"data/known/"
     }
 }
 ```
@@ -207,7 +213,7 @@ For this tutorial, I used a dataset from Kaggle ( [Predict IDC in Breast Cancer 
 
 ## Finetuning Your Training Parameters
 
-You can finetune the settings of the network at any time by editing the classifier settings in the **model/confs.json** file.
+You can finetune the settings of the network at any time by editing the classifier settings in the **required/confs.json** file.
 
 ```
 "ClassifierSettings":{
@@ -225,7 +231,7 @@ You can finetune the settings of the network at any time by editing the classifi
     "image_size":299,
     "num_classes":2,
     "num_epochs":60,
-    "dev_cloud_epochs":60,
+    "dev_cloud_epochs":40,
     "test_num_epochs":1,
     "batch_size":10,
     "test_batch_size":36,
@@ -235,7 +241,13 @@ You can finetune the settings of the network at any time by editing the classifi
     "NetworkPath":"",
     "InceptionImagePath":"model/test/",
     "InceptionThreshold": 0.54,
-    "InceptionGraph":"igraph"
+    "InceptionGraph":"model/idc.graph",
+    "InceptionGraphDevCloud":"model/idcdc.graph",
+    "Graph":"model/tass.graph",
+    "Dlib":"model/dlib/shape_predictor_68_face_landmarks.dat",
+    "dataset_dir":"model/train/",
+    "TestingPath":"data/testing/",
+    "ValidPath":"data/known/"
 }
 ```
 
@@ -310,52 +322,124 @@ python3.5 Classifier.py Facenet
 2. Test the Inception V3 model
 3. Test the Facenet model
 
-## Testing Your IDC  & Facial Recognition Models
+## Testing Your IDC & Facial Recognition Models
 
-Once the graph has been compiled a testing program will start for each of the two classifiers. In my IDC example I had two classes 0 and 1 (IDC negative & IDC positive), a classification of 0 shows that the AI thinks the image is not IDC positive, and a classification of 1 is positive.
+Once the graphs have been compiled a testing program will start for each of the two classifiers/graphs. 
+
+In the **IDC** example there are two classes 0 and 1 (**IDC negative** & **IDC positive**), a classification of 0 shows that the AI thinks the image is not IDC positive, and a classification of 1 is positive.
 
 ```
+!! Welcome to the Intel AI DevJam Classifier, please wait while the program initiates !!
+
+-- Running on Python 3.5.2 (default, Nov 23 2017, 16:37:01)
+[GCC 5.4.0 20160609]
+
+-- Imported Required Modules
+-- Setup Environment Settings
+-- Movidius Connected
+-- Initiating JumpWayMQTT Device
+-- JumpWayMQTT Device Initiated
+-- JumpWayMQTT Device Connection Initiating
+-- JumpWayMQTT Device Connection Initiated
+-- IoT JumpWay Initiated
+-- Classifier Initiated
+-- Allocated Inception V3 Graph OK
+-- JumpWayMQTT Device Connected
+rc: 0
+-- Published to Device Status
+-- Published: 1
+-- IDC Categories Loaded OK: 2
+-- INCEPTION V3 TEST MODE STARTED: :  2018-06-09 08:36:21.539925
 -- Loaded Test Image model/test/negative.png
-
 -- DETECTION STARTING
--- STARTED: :  2018-04-24 14:14:26.780554
-
+-- STARTED: :  2018-06-09 08:36:21.551393
 -- DETECTION ENDING
--- ENDED:  2018-04-24 14:14:28.691870
--- TIME: 1.9114031791687012
+-- ENDED:  2018-06-09 08:36:23.460571
+-- TIME: 1.909158706665039
 
-*******************************************************************************
-inception-v3 on NCS
-*******************************************************************************
-0 0 0.9873
-1 1 0.01238
-*******************************************************************************
+!! TASS Did Not Identify IDC
 
+-- Published to Device Warnings Channel
+
+-- Published: 2
+-- Published to Device Sensors Channel
 -- Loaded Test Image model/test/positive.png
-
+-- Published: 3
 -- DETECTION STARTING
--- STARTED: :  2018-04-24 14:14:28.699254
-
+-- STARTED: :  2018-06-09 08:36:23.470298
 -- DETECTION ENDING
--- ENDED:  2018-04-24 14:14:30.577683
--- TIME: 1.878432035446167ß
+-- ENDED:  2018-06-09 08:36:25.349699
+-- TIME: 1.8793988227844238
 
-TASS Identified IDC with a confidence of 0.945
+!! TASS Identified IDC with a confidence of 0.945
 
+-- Published: 4
+-- Published to Device Warnings Channel
+
+-- Published: 5
 -- Published to Device Sensors Channel
 
-*******************************************************************************
-inception-v3 on NCS
-*******************************************************************************
-1 1 0.945
-0 0 0.05542
-*******************************************************************************
-
 -- INCEPTION V3 TEST MODE ENDING
--- ENDED:  2018-04-24 14:14:30.579247
+-- ENDED:  2018-06-09 08:36:25.353735
 -- TESTED:  2
 -- IDENTIFIED:  1
--- TIME(secs): 3.984593152999878
+-- TIME(secs): 3.813807725906372
+
+!! SHUTTING DOWN !!
+```
+
+In the **Facenet** example the program will first loop through your testing images, and once it sees a face it will loop through all of the known faces and match them against the faces, once it finds a match, or not, it will move on to the next image in your testing loop until all images have been classifier as known or unknown. 
+
+```
+!! Welcome to the Intel AI DevJam Classifier, please wait while the program initiates !!
+
+-- Running on Python 3.5.2 (default, Nov 23 2017, 16:37:01)
+[GCC 5.4.0 20160609]
+
+-- Imported Required Modules
+-- Setup Environment Settings
+-- Movidius Connected
+-- Initiating JumpWayMQTT Device
+-- JumpWayMQTT Device Initiated
+-- JumpWayMQTT Device Connection Initiating
+-- JumpWayMQTT Device Connection Initiated
+-- IoT JumpWay Initiated
+-- Classifier Initiated
+-- Allocated Facenet Graph OK
+-- JumpWayMQTT Device Connected
+rc: 0
+-- Published to Device Status
+-- Published: 1
+-- IDC Categories Loaded OK: 2
+-- FACENET TEST MODE STARTING
+-- STARTED:  2018-06-09 08:44:36.233488
+-- Total Difference is: 1.1339170932769775
+-- MATCH Adam-3.jpg
+-- Published to Device Warnings Channel
+-- Published: 2
+-- Total Difference is: 0.8448524475097656
+-- MATCH Adam-2.jpg
+-- Published to Device Warnings Channel
+-- Published: 3
+-- Total Difference is: 0.8118671178817749
+-- MATCH Adam-6.jpg
+-- Published to Device Warnings Channel
+-- Published: 4
+-- Total Difference is: 0.8795345425605774
+-- MATCH Adam-4.jpg
+-- Published to Device Warnings Channel
+-- Published: 5
+-- Total Difference is: 1.0212488770484924
+-- MATCH Adam-5.jpg
+-- Published to Device Warnings Channel
+
+-- FACENET TEST MODE ENDING
+-- ENDED:  2018-06-09 08:44:37.861255
+-- TESTED:  5
+-- IDENTIFIED:  5
+-- TIME(secs): 1.6278088092803955
+
+!! SHUTTING DOWN !!
 ```
 
 ## Serving Your Live IDC Model

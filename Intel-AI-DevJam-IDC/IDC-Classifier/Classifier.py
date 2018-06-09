@@ -41,7 +41,6 @@ from mvnc import mvncapi as mvnc
 from skimage.transform import resize
 
 print("-- Imported Required Modules")
-print("")
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 os.environ["OMP_NUM_THREADS"] = "12"
@@ -80,10 +79,8 @@ class Classifier():
         self.Helpers = Helpers()
         self._configs = self.Helpers.loadConfigs()
         self.startMQTT()
-
-        print("")
+        
         print("-- Classifier Initiated")
-        print("")
 
     def CheckDevices(self):
 
@@ -179,7 +176,6 @@ def main(argv):
 
         print("-- FACENET TEST MODE STARTING ")
         print("-- STARTED: ", humanStart)
-        print("")
 
         validDir    = Classifier._configs["ClassifierSettings"]["NetworkPath"] + Classifier._configs["ClassifierSettings"]["ValidPath"]
         testingDir  = Classifier._configs["ClassifierSettings"]["NetworkPath"] + Classifier._configs["ClassifierSettings"]["TestingPath"]
@@ -204,7 +200,6 @@ def main(argv):
                                 if (FacenetHelpers.match(valid_output, test_output)):
                                     identified = identified + 1
                                     print("-- MATCH "+test)
-                                    print("")
 
                                     Classifier.jumpwayClient.publishToDeviceChannel(
                                         "Warnings",
@@ -219,7 +214,6 @@ def main(argv):
                                 else:
                                     
                                     print("-- NO MATCH")
-                                    print("")
 
                                     Classifier.jumpwayClient.publishToDeviceChannel(
                                         "Warnings",
@@ -241,7 +235,6 @@ def main(argv):
         print("-- IDENTIFIED: ", identified)
         print("-- TIME(secs): {0}".format(clockEnd - clockStart))
         print("")
-
         print("!! SHUTTING DOWN !!")
         print("")
 
@@ -255,9 +248,7 @@ def main(argv):
         humanStart = datetime.now()
         clockStart = time.time()
 
-        print("-- INCEPTION V3 TEST MODE STARTING ")
-        print("-- STARTED: : ", humanStart)
-        print("")
+        print("-- INCEPTION V3 TEST MODE STARTED: : ", humanStart)
 
         rootdir= Classifier._configs["ClassifierSettings"]["NetworkPath"] + Classifier._configs["ClassifierSettings"]["InceptionImagePath"]
 
@@ -271,10 +262,8 @@ def main(argv):
                 files = files + 1
                 fileName = rootdir+file
 
-                print("")
                 print("-- Loaded Test Image", fileName)
                 img = cv2.imread(fileName).astype(np.float32)
-                print("")
 
                 dx,dy,dz= img.shape
                 delta=float(abs(dy-dx))
@@ -299,7 +288,6 @@ def main(argv):
 
                 print("-- DETECTION STARTING ")
                 print("-- STARTED: : ", detectionStart)
-                print("")
 
                 Classifier.graph.LoadTensor(img.astype(np.float16), 'user object')
                 output, userobj = Classifier.graph.GetResult()
@@ -309,18 +297,16 @@ def main(argv):
                 detectionEnd = datetime.now()
                 detectionClockEnd = time.time()
 
-                print("")
                 print("-- DETECTION ENDING")
                 print("-- ENDED: ", detectionEnd)
                 print("-- TIME: {0}".format(detectionClockEnd - detectionClockStart))
-                print("")
 
                 if output[top_inds[0]] > Classifier._configs["ClassifierSettings"]["InceptionThreshold"] and Classifier.categories[top_inds[0]] == "1":
 
                     identified = identified + 1
 
                     print("")
-                    print("TASS Identified IDC with a confidence of", str(output[top_inds[0]]))
+                    print("!! TASS Identified IDC with a confidence of", str(output[top_inds[0]]))
                     print("")
 
                     Classifier.jumpwayClient.publishToDeviceChannel(
@@ -336,6 +322,10 @@ def main(argv):
                     print("")
 
                 else:
+
+                    print("")
+                    print("!! TASS Did Not Identify IDC")
+                    print("")
 
                     Classifier.jumpwayClient.publishToDeviceChannel(
                         "Warnings",
@@ -357,19 +347,6 @@ def main(argv):
                         "SensorValue":"IDC: " + Classifier.categories[top_inds[0]] + " (Confidence: " + str(output[top_inds[0]]) + ")"
                     }
                 )
-
-                #print(top_inds)
-                #print(Classifier.categories)
-
-                print("".join(['*' for i in range(79)]))
-                print('inception-v3 on NCS')
-                print("".join(['*' for i in range(79)]))
-
-                for i in range(2):
-
-                    print(top_inds[i], Classifier.categories[top_inds[i]], output[top_inds[i]])
-
-                print("".join(['*' for i in range(79)]))
 
         humanEnd = datetime.now()
         clockEnd = time.time()
