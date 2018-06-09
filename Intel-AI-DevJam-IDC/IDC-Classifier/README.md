@@ -52,7 +52,7 @@ The **TASS Movidius Facenet Classifier** uses **Siamese Neural Networks** and **
 ## Software Requirements
 
 - [Intel® NCSDK](https://github.com/movidius/ncsdk "Intel® NCSDK")
-- [Tensorflow](https://www.tensorflow.org/install "Tensorflow")
+- [Tensorflow 1.4.0](https://www.tensorflow.org/install "Tensorflow 1.4.0")
 - [IoT JumpWay Python MQTT Client](https://github.com/iotJumpway/JumpWayMQTT "IoT JumpWay Python MQTT Client")
 - [GrovePi](https://github.com/DexterInd/GrovePi "GrovePi")
 
