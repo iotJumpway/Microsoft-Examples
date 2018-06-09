@@ -471,7 +471,7 @@ You are now ready to take the final steps, at this point you should have everyth
 
 Next we are going to set up the rules that allow the IDC server to control your Raspberry Pi Dev Kit IoT Alarm autonomously. Go back to the IDC device edit page. Scroll down to below where you added the camera node and you will see you are able to add rules.
 
-![IoT JumpWay Intel® Edison Dev Kit IoT Alarm](../../images/main/Automation.PNG)
+![IoT JumpWay Intel® Edison Dev Kit IoT Alarm](images/IoT-Dev-Kit-Alarm.jpg)
 
 The rules that we want to add are as follows:
 
