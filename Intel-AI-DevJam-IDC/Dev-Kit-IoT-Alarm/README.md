@@ -1,6 +1,6 @@
 # IoT JumpWay Raspberry Pi Dev Kit IoT Alarm
 
-![IoT JumpWay Raspberry Pi Dev Kit IoT Alarm](../images/Dev-Kit-IoT-Alarm.png)
+![IoT JumpWay Raspberry Pi Dev Kit IoT Alarm](images/Dev-Kit-IoT-Alarm.png)
 
 ## Introduction
 Want to take your first steps into the magical world of the Internet of Things, or want to find out how easy it is to use the IoT JumpWay as your secure IoT communication platform? This tutorial is for you and will hold your hand through setting up your first Raspberry Pi Dev Kit IoT Alarm project powered by the IoT JumpWay.
@@ -21,7 +21,7 @@ The tutorial will use IoT JumpWay Python MQTT Library for communication, a Raspb
 
 ## Hardware requirements
 
-![IoT JumpWay Raspberry Pi Dev Kit IoT Alarm](../images/hardware.jpg)
+![IoT JumpWay Raspberry Pi Dev Kit IoT Alarm](images/hardware.jpg)
 
 - 1 x Raspberry Pi 3
 - 1 x Grove starter kit for IoT, Raspberry Pi edition
@@ -58,7 +58,7 @@ Then reboot your Raspberry Pi.
 
 ## Setting Up Your Raspberry Pi
 
-![IoT JumpWay Raspberry Pi Dev Kit IoT Alarm](../images/blinking.jpg)
+![IoT JumpWay Raspberry Pi Dev Kit IoT Alarm](images/blinking.jpg)
 
 First of all you need to connect up an LED to your Raspberry Pi.
 
@@ -71,7 +71,7 @@ First of all you need to connect up an LED to your Raspberry Pi.
 
 - Follow the [IoT JumpWay Developer Program (BETA) Location Device Doc](https://github.com/iotJumpway/IoT-JumpWay-Docs/blob/master/4-Location-Devices.md "IoT JumpWay Developer Program (BETA) Location Device Doc") to set up your device, and the [IoT JumpWay Developer Program (BETA) Location Application Doc](https://github.com/iotJumpway/IoT-JumpWay-Docs/blob/master/5-Location-Applications.md "IoT JumpWay Developer Program (BETA) Location Application Doc") to set up your application.
 
-![IoT JumpWay Raspberry Pi Dev Kit IoT Alarm](../../images/main/Device-Creation.png)
+![IoT JumpWay Raspberry Pi Dev Kit IoT Alarm](../images/main/Device-Creation.png)
 
 - Retrieve your connection credentials and update the config.json file with your new connection credentials and actuator (falseLED, trueLED & Buzzer) settings.
 
@@ -123,7 +123,7 @@ Each command sent to the device is stored in the [IoT JumpWay](https://iot.techb
 
 ![IoT JumpWay Raspberry Pi Dev Kit IoT Alarm](../../images/main/SensorData.png)
 
-![IoT JumpWay Raspberry Pi Dev Kit IoT Alarm](../../images/main/WarningData.png)
+![IoT JumpWay Raspberry Pi Dev Kit IoT Alarm](../../images/WarningData.png)
 
 ## Bugs/Issues
 
@@ -131,4 +131,4 @@ Please feel free to create issues for bugs and general issues you come across wh
 
 ## Contributors
 
-[![Adam Milton-Barker, Intel® Software Innovator](../../images/main/Intel-Software-Innovator.jpg)](https://github.com/AdamMiltonBarker)
+[![Adam Milton-Barker, Intel® Software Innovator](../../images/Intel-Software-Innovator.jpg)](https://github.com/AdamMiltonBarker)
