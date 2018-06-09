@@ -197,7 +197,7 @@ This do the following:
 - Downloads the pretrained **Inception V3** model
 - Converts the Facenet model to a model that is compatible with the **Intel® Movidius**
 
-**Preparing Your Facial Recognition Dataset**
+## Preparing Your Facial Recognition Dataset
 
 You need to set up two very small datasets. As we are using a pretrained **Facenet** model there is no training to do in this tutorial and we only need one image per known person. You should see the **known** and **testing** folders in the **data** directory, this is where you will store 1 image of each person you want to be identified by the network, and also a testing dataset that can include either known or unknown faces for testing. When you store the known data, you should name each image with the name you want them to be identified as in the system, in my testing I used images of me and two other random people, the 1 image used to represent myself in the known folder was named Adam.
 
@@ -293,7 +293,7 @@ INFO:tensorflow:Final Streaming Accuracy: 0.8941
 When the training completes you need to download **model/DevCloudIDC.pb** and **model/classes.txt** to the **model** directory on your development machine, ensure the Movidius is setup and connected and then run the following commands on your development machine:
 
 ```
-$ cd ~/IoT-JumpWay-Intel-Examples/master/Intel-Movidius/IDC-Classification
+$ cd ~/IoT-JumpWay-Microsoft-Examples/Intel-AI-DevJam-IDC/IDC-Classifier
 $ ./DevCloudTrainer.sh
 ```
 
@@ -302,11 +302,13 @@ The contents of DevCloudTrainer.sh are as follows:
 ```
 #IDC Classification Trainer
 mvNCCompile model/DevCloudIDC.pb -in=input -on=InceptionV3/Predictions/Softmax -o igraph
-python3.5 Classifier.py InceptionTest
+python3.5 Classifier.py Inception
+python3.5 Classifier.py Facenet
 ```
 
 1. Compile the model for Movidius
-2. Test
+2. Test the Inception V3 model
+3. Test the Facenet model
 
 ## Testing Your IDC Model
 
