@@ -4,7 +4,7 @@
 
 ## Introduction
 
-The **Intel AI DevJam Demo** project provides the source codes and tutorials for setting up the same project that will demonstrated at **ICML** (**International Conference on Machine Learning**) in **Sweden**, July 2018.
+The **Intel AI DevJam Demo** project provides the source codes and tutorials for setting up the same project that will demonstrated at **Intel AI DevJam** at **ICML** (**International Conference on Machine Learning**) in **Sweden**, July 2018.
 
 ![Intel® Movidius](images/ICML-AI-DevJam.jpg)
 
