@@ -24,14 +24,15 @@ The **TASS Movidius Facenet Classifier** uses **Siamese Neural Networks** and **
 1.  Install the [Intel® NCSDK](https://github.com/movidius/ncsdk "Intel® NCSDK") on a Linux development device.
 2.  Install the [Intel® NCSDK API](https://github.com/movidius/ncsdk "Intel® NCSDK API") on a Raspberry Pi 3 / UP Squared.
 3.  Install the [IoT JumpWay Python MQTT Client](https://github.com/AdamMiltonBarker/JumpWayMQTT "IoT JumpWay Python MQTT Client") on the Raspberry Pi / UP Squared and configure the IoT JumpWay.
-4.  Clone & Set Up The Repo.
-5.  Prepare your training dataset.
-6.  Finetuning your training parameters.
-7.  Train Inception V3 IDC Classification model on Intel® AI DevCloud.
-8.  Convert the model to a format suitable for the Movidius.
-9.  Test the IDC classifier locally on the Linux development device.
-10. Live IDC classification via the server / client.
-11. Build an IoT connected alarm that will be triggered when IDC is detected.
+4.  Clone & set up the repo.
+5.  Setup your facial recognition Model
+6.  Prepare your IDC training dataset.
+7.  Finetuning your IDC training parameters.
+8.  Train Inception V3 IDC Classification model on Intel® AI DevCloud.
+9.  Convert the model to a format suitable for the Movidius.
+10.  Test the IDC classifier locally on the Linux development device.
+11. Live IDC classification via the server / client.
+12. Build an IoT connected alarm that will be triggered when IDC is detected.
 
 ## Applications
 
@@ -179,6 +180,22 @@ You will need to clone this repository to a location on your development termina
     $ git clone https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples.git
 
 Once you have the repo, you will need to find the files in this folder located in [IoT-JumpWay-Microsoft-Examples/Intel-AI-DevJam-IDC/IDC-Classifier](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier "IoT-JumpWay-Microsoft-Examples/Intel-AI-DevJam-IDC/IDC-Classifier").
+
+## Setup Your Facial Recognition Model
+
+First of all you need to setup the facial recognition capabilities for the project. For this you can use the **setup.sh** file provided. Assuming you are in the **IoT-JumpWay-Microsoft-Examples/Intel-AI-DevJam-IDC/IDC-Classifier** directory, **make sure you have you have your Movidius plugged in** and run the following command from terminal:
+
+```
+ $ sed -i 's/\r//' setup.sh
+ $ sh setup.sh
+```
+
+This do the following:
+
+- Install the required packages named in **requirements.txt**
+- Downloads the pretrained **Facenet** model (**davidsandberg/facenet**)
+- Downloads the pretrained **Inception V3** model
+- Converts the Facenet model to a model that is compatible with the **Intel® Movidius**
 
 ## Preparing Your IDC Training Data
 
