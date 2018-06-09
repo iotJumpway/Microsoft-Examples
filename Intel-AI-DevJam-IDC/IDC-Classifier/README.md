@@ -310,9 +310,9 @@ python3.5 Classifier.py Facenet
 2. Test the Inception V3 model
 3. Test the Facenet model
 
-## Testing Your IDC Model
+## Testing Your IDC  & Facial Recognition Models
 
-Once the shell script has finished the testing program will start. In my example I had two classes 0 and 1 (IDC negative & IDC positive), a classification of 0 shows that the AI thinks the image is not IDC positive, and a classification of 1 is positive.
+Once the graph has been compiled a testing program will start for each of the two classifiers. In my IDC example I had two classes 0 and 1 (IDC negative & IDC positive), a classification of 0 shows that the AI thinks the image is not IDC positive, and a classification of 1 is positive.
 
 ```
 -- Loaded Test Image model/test/negative.png
