@@ -121,7 +121,7 @@ First of all you need to connect up an LED to your Raspberry Pi.
 
 Each command sent to the device is stored in the [IoT JumpWay](https://iot.techbubbletechnologies.com/ "IoT JumpWay"). You will be able to access the data in the [IoT JumpWay Developers Area](https://iot.techbubbletechnologies.com/developers/dashboard/ "IoT JumpWay Developers Area"). Once you have logged into the Developers Area, visit the [IoT JumpWay Location Devices Page](https://iot.techbubbletechnologies.com/developers/location-devices "Location Devices page"), find your device and then visit the Commands Data page to view the data sent from your device.
 
-![IoT JumpWay Raspberry Pi Dev Kit IoT Alarm](../../images/main/SensorData.png)
+![IoT JumpWay Raspberry Pi Dev Kit IoT Alarm](../../images/SensorData.png)
 
 ![IoT JumpWay Raspberry Pi Dev Kit IoT Alarm](../../images/WarningData.png)
 
