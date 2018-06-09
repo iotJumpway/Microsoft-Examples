@@ -1,21 +1,47 @@
 ############################################################################################
-# Title: Intel AI DevJam Classifier
-# Description: Test classification of local testing images.
+# Title: Intel AI DevJam IDC Demo Classifier
+# Description: Test classification of local IDC & facial recognition testing images.
 # Acknowledgements: Uses code from Intel movidius/ncsdk (https://github.com/movidius/ncsdk)
 # Last Modified: 2018-06-09
 ############################################################################################
 
 ############################################################################################
 #
-#    CLASSIFIER MODE:
+# CLASSIFIER MODE:
 #
-#       Classifier & IoT JumpWay configuration can be found in data/confs.json
+#   Classifier & IoT JumpWay configuration can be found in required/confs.json
 #
-#    Example Usage:
+# Example Usage:
 #
-#        $ python3.5 Classifier.py Inception
-#        $ python3.5 Classifier.py Facenet
+#   $ python3.5 Classifier.py Inception
+#   $ python3.5 Classifier.py Facenet
 #
+############################################################################################
+
+############################################################################################
+#
+# The MIT License (MIT)
+# 
+# Intel AI DevJam IDC Demo Classifier
+# Copyright (C) 2018 Adam Milton-Barker (AdamMiltonBarker.com)
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 ############################################################################################
 
 print("")
@@ -26,7 +52,6 @@ print("")
 import os, sys
 
 print("-- Running on Python "+sys.version)
-print("")
 
 import time,csv,getopt,json,time, cv2
 import numpy as np
@@ -69,11 +94,6 @@ class Classifier():
         self.fgraphfile = None
         self.fgraph = None
         self.reqsize = None
-
-        self.extensions = [
-            ".jpg",
-            ".png"
-        ]
 
         self.CheckDevices()
         self.Helpers = Helpers()
