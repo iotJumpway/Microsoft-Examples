@@ -114,7 +114,7 @@ There are a few tutorials that you should follow before beginning, especially if
 
 ## IoT JumpWay Device Connection Credentials & Settings
 
-- Setup an IoT JumpWay Location Device for IDC Classifier, ensuring you set up a camera node, as you will need the ID of the dummy camera for the project to work. Once your create your device add the location ID and Zone ID to the **IoTJumpWay** details in the confs file located at **model/confs.json**, also add the device ID and device name exactly, add the MQTT credentials to the **IoTJumpWayMQTT** .
+- Setup an IoT JumpWay Location Device for IDC Classifier, ensuring you set up a camera node, as you will need the ID of the dummy camera for the project to work. Once your create your device add the location ID and Zone ID to the **IoTJumpWay** details in the confs file located at **required/confs.json**, also add the device ID and device name exactly, add the MQTT credentials to the **IoTJumpWayMQTT** .
 
 You will need to edit your device and add the rules that will allow it to communicate autonomously with the other devices and applications on the network, but for now, these are the only steps that need doing at this point.
 
@@ -444,9 +444,12 @@ rc: 0
 
 ## Serving Your Live IDC Model
 
-Now that we are all trained and tested, it is time to set up the server that will serve the API. For this I have provided **Server.py** and **Client.py**
+Now that we are all trained and tested, it is time to set up the server that will serve an **API** that provides access to your trained models. 
 
-The following instructions will help you set up your server and test a positive and negative prediction:
+- **Server.py** starts an **Rest api server** with **API endpoints** for both your **IDC** and **Facenet** classifiers.
+- **Client.py** is provided to test sending images via HTTP to the API to receive a classification.
+
+The following instructions will help you set up your server:
 
 1. If you used the [Predict IDC in Breast Cancer Histology Images](https://www.kaggle.com/paultimothymooney/predict-idc-in-breast-cancer-histology-image "Predict IDC in Breast Cancer Histology Images") dataset, you can use the **positive.png** & **negative.png** as they are from that dataset, if not you should chose a positive and negative example from your testing set and replace these images.
 
@@ -457,9 +460,9 @@ The following instructions will help you set up your server and test a positive 
 ```
 model/test/
 model/classes.txt
-model/confs.json
+required/confs.json
 tools
-igraph
+
 Server.py
 ```
 
