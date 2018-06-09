@@ -69,6 +69,8 @@ The **TASS Movidius Facenet Classifier** uses **Siamese Neural Networks** and **
 
 ## Install NCSDK On Your Development Device
 
+![Intel® Movidius](images/Movidius.jpg)
+
 The first thing you will need to do is to install the **NCSDK** on your development device, this will be used to convert the trained model into a format that is compatible with the Movidius.
 
 ```
@@ -87,8 +89,6 @@ Next plug your Movidius into your device and issue the following commands:
 ```
 
 ## Install NCSDK On Your Raspberry Pi 3 / UP Squared
-
-![Intel® Movidius](images/Movidius.jpg)
 
 Next you will need to install the **NCSDK** on your **Raspberry Pi 3** / **UP Squared** device, this will be used by the classifier to carry out inference on local images or images received via the API we will create. Make sure you have the Movidius plugged in.
 
