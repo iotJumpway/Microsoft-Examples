@@ -17,7 +17,7 @@ The **TASS Movidius Facenet Classifier** uses **Siamese Neural Networks** and **
 
 **IoT connectivity** for the project is provided by the [IoT JumpWay](https://www.iotjumpway.tech "IoT JumpWay"). The **IoT JumpWay** is an **IoT communication** platform as a service (PaaS) with a social network frontend. IoT JumpWay developers will soon be able to share projects/photos/videos and events. Use of the IoT JumpWay is completely free, you can find out more on the [Developer Program](https://iot.techbubbletechnologies.com/developers/ "Developer Program") page.
 
-![Intel® Movidius](images/Movidius.jpg)
+![Intel® UP2](images/UP2.jpg)
 
 ## What Will We Do?
 
@@ -88,7 +88,7 @@ Next plug your Movidius into your device and issue the following commands:
 
 ## Install NCSDK On Your Raspberry Pi 3 / UP Squared
 
-![Intel® UP2](images/UP2.jpg)
+![Intel® Movidius](images/Movidius.jpg)
 
 Next you will need to install the **NCSDK** on your **Raspberry Pi 3** / **UP Squared** device, this will be used by the classifier to carry out inference on local images or images received via the API we will create. Make sure you have the Movidius plugged in.
 
