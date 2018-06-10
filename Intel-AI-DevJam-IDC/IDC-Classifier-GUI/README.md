@@ -36,7 +36,9 @@ You should have already downloaded the repository source code when you completed
 You can test that the project is able to access your camera by pressing the run button in the Visual Studio main toolbar. This will first check for permissions and then display the camera stream in the GUI.
 
 ![Testing The Universal Windows Application](images/permissions.jpg)
+
 ![Testing The Universal Windows Application](images/permissions-microphone.jpg)
+
 ![Testing The Universal Windows Application](images/camera-screen.jpg)
 
 ## Bugs/Issues
