@@ -1,7 +1,7 @@
 # Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT
 ## Intel AI DevJam Demo GUI
 
-![Intel AI DevJam Demo GUI](images/IDC-Classification.jpg)
+![Intel AI DevJam Demo GUI](../IDC-Classifier/images/IDC-Classification.jpg)
 
 ## Introduction
 
