@@ -44,9 +44,11 @@ An IoT connected alarm awaits messages for the results of the **facial** and **I
 
 ## Tutorials & Source Codes
 
-- [Classifiers & IoT Device](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier "Classifiers & IoT Device")
+- [IDC & Facial Classifiers](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier "IDC & Facial Classifiers")
 
 - Universal Windows Application (Coming Soon)
+
+- [IoT Device](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/Dev-Kit-IoT-Alarm "IoT Device")
 
 ## Bugs/Issues
 
