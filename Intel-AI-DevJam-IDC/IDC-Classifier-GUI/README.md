@@ -17,8 +17,6 @@ The **Intel® AI DevJam Demo GUI** uses a **Windows application** to communicate
 
 Make sure you have completed the following steps before continuing to configure the Universal Windows Application. 
 
-![IDC Classifier Universal Windows Application](images/VS2017-Universal-Windows-App.jpg)
-
 - Setup the [IDC classification server/API](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier "IDC classification server/API").
 
 - Setup the [IoT alarm device](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/Dev-Kit-IoT-Alarm "IoT alarm device").
@@ -28,6 +26,8 @@ Make sure you have completed the following steps before continuing to configure 
 - [Microsoft Visual Studio 2017](https://www.visualstudio.com/downloads/ "Microsoft Visual Studio 2017")
 
 ## Setting Up The Universal Windows Application
+
+![IDC Classifier Universal Windows Application](images/VS2017-Universal-Windows-App.jpg)
 
 You should have already downloaded the repository source code when you completed the [IDC classification server/API](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier "IDC classification server/API") setup. Navigate to **IoT-JumpWay-Microsoft-Examples/Intel-AI-DevJam-IDC** and double click the **IDC-Classifier-GUI.sln** file to open the solution in **Visual Studio 2017**.
 
