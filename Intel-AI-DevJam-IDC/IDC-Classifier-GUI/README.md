@@ -13,7 +13,9 @@ The **Intel® AI DevJam Demo GUI** uses a **Windows application** to communicate
 
 **IoT connectivity** for the project is provided by the [IoT JumpWay](https://www.iotjumpway.tech "IoT JumpWay"). The **IoT JumpWay** is an **IoT communication** platform as a service (PaaS) with a social network frontend. IoT JumpWay developers will soon be able to share projects/photos/videos and events. Use of the IoT JumpWay is completely free, you can find out more on the [Developer Program](https://iot.techbubbletechnologies.com/developers/ "Developer Program") page.
 
-## What Will We Do?
+## Checklist
+
+Make sure you have completed the following steps before continuing to configure the Universal Windows Application. 
 
 ![IDC Classifier Universal Windows Application](images/VS2017-Universal-Windows-App.jpg)
 
@@ -21,7 +23,21 @@ The **Intel® AI DevJam Demo GUI** uses a **Windows application** to communicate
 
 - Setup the [IoT alarm device](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/Dev-Kit-IoT-Alarm "IoT alarm device").
 
-- Setup the [Universal Windows Application](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier-GUI "Universal Windows Application").
+## Software Requirements
+
+- [Microsoft Visual Studio 2017](https://www.visualstudio.com/downloads/ "Microsoft Visual Studio 2017")
+
+## Setting Up The Universal Windows Application
+
+You should have already downloaded the repository source code when you completed the [IDC classification server/API](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier "IDC classification server/API") setup. Navigate to **IoT-JumpWay-Microsoft-Examples/Intel-AI-DevJam-IDC** and double click the **IDC-Classifier-GUI.sln** file to open the solution in **Visual Studio 2017**.
+
+## Testing The Universal Windows Application
+
+You can test that the project is able to access your camera by pressing the run button in the Visual Studio main toolbar. This will first check for permissions and then display the camera stream in the GUI.
+
+![Testing The Universal Windows Application](images/permissions.jpg)
+![Testing The Universal Windows Application](images/permissions-microphone.jpg)
+![Testing The Universal Windows Application](images/camera-screen.jpg)
 
 ## Bugs/Issues
 
