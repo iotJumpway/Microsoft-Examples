@@ -118,7 +118,7 @@ class Server():
 
             self.graph = self.movidius.AllocateGraph(graphfile)
 
-        elif graphID == "Facenet":
+        elif graphID == "TASS":
 
             self.fgraph = self.movidius.AllocateGraph(graphfile)
 
@@ -149,14 +149,14 @@ class Server():
 
             print("-- IDC Categories Loaded OK:", len(self.categories))
 
-        elif graphID == "Facenet":
+        elif graphID == "TASS":
 
             with open(self._configs["ClassifierSettings"]["NetworkPath"] + self._configs["ClassifierSettings"]["Graph"], mode='rb') as f:
 
                 self.fgraphfile = f.read()
 
-            self.allocateGraph(self.fgraphfile,"Facenet")
-            print("-- Allocated Facenet Graph OK")
+            self.allocateGraph(self.fgraphfile,"TASS")
+            print("-- Allocated TASS Graph OK")
 
     def startMQTT(self):
 
@@ -180,10 +180,103 @@ class Server():
         print("-- IoT JumpWay Initiated")
 
 Server = Server()
+FacenetHelpers = FacenetHelpers()
 
 @app.route('/api/TASS/infer', methods=['POST'])
 def TASSinference():
-    pass
+    
+    Server.CheckDevices()
+    Server.loadRequirements("TASS")
+
+    humanStart = datetime.now()
+    clockStart = time.time()
+
+    print("-- FACENET LIVE INFERENCE STARTED: ", humanStart)
+
+    r = request
+    nparr = np.fromstring(r.data, np.uint8)
+
+    print("-- Loading Face")
+    fileName = "data/captured/TASS/"+str(clockStart)+'.png'
+    img = cv2.imdecode(nparr, cv2.IMREAD_UNCHANGED)
+    cv2.imwrite(fileName,img)
+    img = cv2.imread(fileName).astype(np.float32)
+    print("-- Loaded Sample")
+
+    validDir    = Server._configs["ClassifierSettings"]["NetworkPath"] + Server._configs["ClassifierSettings"]["ValidPath"]
+    testingDir  = Server._configs["ClassifierSettings"]["NetworkPath"] + Server._configs["ClassifierSettings"]["TestingPath"]
+
+    files = 0
+    identified = 0
+
+    test_output = FacenetHelpers.infer(img, Server.fgraph)
+    files = files + 1
+
+    for valid in os.listdir(validDir):
+
+        if valid.endswith('.jpg') or valid.endswith('.jpeg') or valid.endswith('.png') or valid.endswith('.gif'):
+
+            valid_output = FacenetHelpers.infer(cv2.imread(validDir+valid), Server.fgraph)
+
+            if (FacenetHelpers.match(valid_output, test_output)):
+                identified = identified + 1
+                print("-- MATCH "+valid)
+                break
+
+    if identified:
+
+        Server.jumpwayClient.publishToDeviceChannel(
+            "Warnings",
+            {
+                "WarningType":"CCTV",
+                "WarningOrigin": Server._configs["Cameras"][0]["ID"],
+                "WarningValue": "RECOGNISED",
+                "WarningMessage":valid+" Detected"
+            }
+        )
+
+    else:
+
+        Server.jumpwayClient.publishToDeviceChannel(
+            "Warnings",
+            {
+                "WarningType":"CCTV",
+                "WarningOrigin": Server._configs["Cameras"][0]["ID"],
+                "WarningValue": "INTRUDER",
+                "WarningMessage":"INTRUDER"
+            }
+        )
+
+    humanEnd = datetime.now()
+    clockEnd = time.time()
+
+    Server.fgraph.DeallocateGraph()
+    Server.movidius.CloseDevice()
+
+    print("")
+    print("-- FACENET LIVE INFERENCE ENDED: ", humanEnd)
+    print("-- TESTED: ", 1)
+    print("-- IDENTIFIED: ", identified)
+    print("-- TIME(secs): {0}".format(clockEnd - clockStart))
+    print("")
+
+    if identified:
+
+        message = valid+" Detected"
+
+    else:
+
+        message = "Intruder Detected!"
+
+    response = {
+        'Response': 'OK',
+        'Results': identified,
+        'ResponseMessage': message
+    }
+
+    response_pickled = jsonpickle.encode(response)
+
+    return Response(response=response_pickled, status=200, mimetype="application/json")
 
 @app.route('/api/IDC/infer', methods=['POST'])
 def IDCinference():
@@ -201,7 +294,7 @@ def IDCinference():
     nparr = np.fromstring(r.data, np.uint8)
 
     print("-- Loading Sample")
-    fileName = str(clockStart)+'.png'
+    fileName = "data/captured/IDC/"+str(clockStart)+'.png'
     img = cv2.imdecode(nparr, cv2.IMREAD_UNCHANGED)
     cv2.imwrite(fileName,img)
     img = cv2.imread(fileName).astype(np.float32)

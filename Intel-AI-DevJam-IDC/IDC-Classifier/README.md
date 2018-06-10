@@ -7,8 +7,6 @@
 
 The **Intel AI DevJam Demo** project provides the source codes and tutorials for setting up the same project that will demonstrated at **Intel AI DevJam** at **ICML** (**International Conference on Machine Learning**) in **Sweden**, July 2018.
 
-![Intel® Movidius](../images/ICML-AI-DevJam.jpg)
-
 The **Intel® AI DevJam Demo** uses a **Windows application** to communicate with a **facial recognition classifier** and a classifier trained to detect **Invasive Ductal Carcinoma (Breast cancer)** in **histology images**. The project combines the  [Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT](https://github.com/iotJumpway/IoT-JumpWay-Intel-Examples/tree/master/Intel-Movidius/IDC-Classification "Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT") and [TASS Movidius Facenet Classifier](https://github.com/iotJumpway/IoT-JumpWay-Intel-Examples/tree/master/Intel-Movidius/TASS/Facenet "TASS Movidius Facenet Classifier") projects.
 
 **Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT** combines **Computer Vision** and the **Internet of Things** to provide a way to train a neural network with labelled breast cancer histology images to detect **Invasive Ductal Carcinoma (IDC)** in unseen/unlabelled images.
@@ -448,25 +446,25 @@ rc: 0
 
 ## Serving Your Live IDC Model
 
-Now that we are all trained and tested, it is time to set up the server that will serve an **API** that provides access to your trained models. 
+Now that we are all trained and tested, it is time to set up the server that will serve an **API** that provides access to your trained models. The Universal Windows Application will use this API to interact with the AI for training / classifying etc.
 
 - **Server.py** starts an **Rest api server** with **API endpoints** for both your **IDC** and **Facenet** classifiers.
 - **Client.py** is provided to test sending images via HTTP to the API to receive a classification.
 
-The following instructions will help you set up your server:
+The server is currently set to start up on localhost, if you would like to change this you need to edit line 281 of **Server.py** and line 38 of **Client.py** to match your desired host. Once you have things working, if you are going to be leaving this running and access it from the outside world you shoud secure it with LetsEncrypt or similar.
 
-1. If you used the [Predict IDC in Breast Cancer Histology Images](https://www.kaggle.com/paultimothymooney/predict-idc-in-breast-cancer-histology-image "Predict IDC in Breast Cancer Histology Images") dataset, you can use the **positive.png** & **negative.png** as they are from that dataset, if not you should chose a positive and negative example from your testing set and replace these images.
-
-2. The server is currently set to start up on localhost, if you would like to change this you need to edit line 281 of **Server.py** and line 38 of **Client.py** to match your desired host. Once you have things working, if you are going to be leaving this running and access it from the outside world you shoud secure it with LetsEncrypt or similar.
-
-3. Upload the following files and folders to the UP Squared or Raspberry Pi 3 that you are going to use for the server.
+Upload the following files and folders to the UP Squared or Raspberry Pi 3 that you are going to use for the server.
 
 ```
+data/captured/
+data/known/
+data/testing/
 model/test/
 model/classes.txt
 required/confs.json
 tools
 
+Client.py
 Server.py
 ```
 
@@ -476,97 +474,225 @@ Server.py
 $ python3.5 Server.py
 ```
 
-5. If you have followed all of the above steps, you can now start the client on your development machine with the following commands:
+```
+!! Welcome to Intel AI DevJam Classification Server, please wait while the program initiates !!
+
+-- Running on Python 3.5.2 (default, Nov 23 2017, 16:37:01)
+[GCC 5.4.0 20160609]
+-- Imported Required Modules
+-- API Initiating
+-- API Intiated
+-- Initiating JumpWayMQTT Device
+-- JumpWayMQTT Device Initiated
+-- JumpWayMQTT Device Connection Initiating
+-- JumpWayMQTT Device Connection Initiated
+-- IoT JumpWay Initiated
+-- Classifier Initiated
+ * Running on http://###.###.#.##:####/ (Press CTRL+C to quit)
+-- JumpWayMQTT Device Connected
+rc: 0
+-- Published to Device Status
+-- Published: 1
+
+```
+
+5. If you have followed all of the above steps, you can now start the client with the following commands:
 
 ```
 $ python3.5 Client.py
 ```
 
-This will send a positive and negative histology slide to the Raspberry Pi 3 / UP Squared which will return the predictions.
+This will send a positive and negative histology slides and test faces to the Raspberry Pi 3 / UP Squared which will return the predictions.
 
 ```
-!! Welcome to IDC Classification Client, please wait while the program initiates !!
+!! Welcome to Intel AI DevJam IDC Demo Classification Client, please wait while the program initiates !!
 
 -- Running on Python 3.5.2 (default, Nov 23 2017, 16:37:01)
 [GCC 5.4.0 20160609]
-
 -- Imported Required Modules
 -- IDC Classification Client Initiated
 
-{'Response': 'OK', 'ResponseMessage': 'IDC Detected!', 'Results': 1}
+-- Using IDC Classification
+-- Testing Dir: model/test/
+-- Sending model/test/negative.png
 {'Response': 'OK', 'ResponseMessage': 'IDC Not Detected!', 'Results': 0}
-```
+-- Testing Dir: model/test/
+-- Sending model/test/positive.png
+{'Response': 'OK', 'ResponseMessage': 'IDC Detected!', 'Results': 1}
+
+-- Using TASS Classification
+-- Testing Dir: data/testing/
+-- Sending data/testing/Adam-3.jpg
+{'Response': 'OK', 'ResponseMessage': 'adam.jpg Detected', 'Results': 1}
+-- Testing Dir: data/testing/
+-- Sending data/testing/Adam-2.jpg
+{'Response': 'OK', 'ResponseMessage': 'adam.jpg Detected', 'Results': 1}
+-- Testing Dir: data/testing/
+-- Sending data/testing/Adam-6.jpg
+{'Response': 'OK', 'ResponseMessage': 'adam.jpg Detected', 'Results': 1}
+-- Testing Dir: data/testing/
+-- Sending data/testing/Adam-4.jpg
+{'Response': 'OK', 'ResponseMessage': 'adam.jpg Detected', 'Results': 1}
+-- Testing Dir: data/testing/
+-- Sending data/testing/Adam-5.jpg
+{'Response': 'OK', 'ResponseMessage': 'adam.jpg Detected', 'Results': 1}
+-- Testing Dir: data/testing/
 
 ```
-* Running on http://0.0.0.0:7455/ (Press CTRL+C to quit)
 
--- IDC CLASSIFIER LIVE INFERENCE STARTING
--- STARTED: :  2018-04-24 14:25:36.465183
+```
+!! Welcome to Intel AI DevJam Classification Server, please wait while the program initiates !!
 
+-- Running on Python 3.5.2 (default, Nov 23 2017, 16:37:01)
+[GCC 5.4.0 20160609]
+-- Imported Required Modules
+-- API Initiating
+-- API Intiated
+-- Initiating JumpWayMQTT Device
+-- JumpWayMQTT Device Initiated
+-- JumpWayMQTT Device Connection Initiating
+-- JumpWayMQTT Device Connection Initiated
+-- IoT JumpWay Initiated
+-- Classifier Initiated
+ * Running on http://###.###.#.##:7455/ (Press CTRL+C to quit)
+-- JumpWayMQTT Device Connected
+rc: 0
+-- Published to Device Status
+-- Published: 1
+-- Movidius Connected
+-- Allocated IDC Graph OK
+-- IDC Categories Loaded OK: 2
+-- INCEPTION V3 IDC INFERENCE STARTED:  2018-06-09 20:28:37.211762
+
+Server.py:294: DeprecationWarning: The binary mode of fromstring is deprecated, as it behaves surprisingly on unicode inputs. Use frombuffer instead
+  nparr = np.fromstring(r.data, np.uint8)
 -- Loading Sample
 -- Loaded Sample
--- DETECTION STARTING
--- STARTED: :  2018-04-24 14:25:36.476371
+-- IDC DETECTION STARTED: :  2018-06-09 20:28:37.225669
 
--- DETECTION ENDING
--- ENDED:  2018-04-24 14:25:38.386121
--- TIME: 1.9097554683685303
-
-TASS Identified IDC with a confidence of 0.945
-
--- Published: 2
+-- IDC DETECTION ENDED:  2018-06-09 20:28:39.135479
+-- TIME: 1.9098103046417236
+!! TASS Did Not Identify IDC
 -- Published to Device Warnings Channel
-
--- Published: 3
+-- Published: 2
 -- Published to Device Sensors Channel
+-- Published: 3
 
-*******************************************************************************
-inception-v3 on NCS
-*******************************************************************************
-1 1 0.945
-0 0 0.05542
-*******************************************************************************
-
--- IDC CLASSIFIER LIVE INFERENCE ENDING
--- ENDED:  2018-04-24 14:25:38.389217
+-- INCEPTION V3 LIVE INFERENCE ENDING
+-- ENDED:  2018-06-09 20:28:39.638233
 -- TESTED:  1
--- IDENTIFIED:  1
--- TIME(secs): 1.9240257740020752
+-- IDENTIFIED:  0
+-- TIME(secs): 2.426482677459717
 
-192.168.1.40 - - [24/Apr/2018 14:25:38] "POST /api/infer HTTP/1.1" 200 -
-
--- IDC CLASSIFIER LIVE INFERENCE STARTING
--- STARTED: :  2018-04-24 14:25:43.422319
+###.###.#.## - - [09/Jun/2018 20:28:39] "POST /api/IDC/infer HTTP/1.1" 200 -
+-- Movidius Connected
+-- Allocated IDC Graph OK
+-- IDC Categories Loaded OK: 4
+-- INCEPTION V3 IDC INFERENCE STARTED:  2018-06-09 20:28:40.305284
 
 -- Loading Sample
 -- Loaded Sample
--- DETECTION STARTING
--- STARTED: :  2018-04-24 14:25:43.432647
+-- IDC DETECTION STARTED: :  2018-06-09 20:28:40.315430
 
--- DETECTION ENDING
--- ENDED:  2018-04-24 14:25:45.310354
--- TIME: 1.877711534500122
-
+-- IDC DETECTION ENDED:  2018-06-09 20:28:42.224892
+-- TIME: 1.9094266891479492
+!! TASS Identified IDC with a confidence of 0.945
 -- Published: 4
 -- Published to Device Warnings Channel
 
 -- Published: 5
 -- Published to Device Sensors Channel
 
-*******************************************************************************
-inception-v3 on NCS
-*******************************************************************************
-0 0 0.9873
-1 1 0.01238
-*******************************************************************************
-
--- IDC CLASSIFIER LIVE INFERENCE ENDING
--- ENDED:  2018-04-24 14:25:45.313174
+-- INCEPTION V3 LIVE INFERENCE ENDING
+-- ENDED:  2018-06-09 20:28:42.729121
 -- TESTED:  1
--- IDENTIFIED:  0
--- TIME(secs): 1.89084792137146
+-- IDENTIFIED:  1
+-- TIME(secs): 2.423848867416382
 
-192.168.1.40 - - [24/Apr/2018 14:25:45] "POST /api/infer HTTP/1.1" 200 -
+###.###.#.## - - [09/Jun/2018 20:28:42] "POST /api/IDC/infer HTTP/1.1" 200 -
+-- Movidius Connected
+-- Allocated TASS Graph OK
+-- FACENET LIVE INFERENCE STARTED:  2018-06-09 20:28:43.495818
+Server.py:197: DeprecationWarning: The binary mode of fromstring is deprecated, as it behaves surprisingly on unicode inputs. Use frombuffer instead
+  nparr = np.fromstring(r.data, np.uint8)
+-- Loading Face
+-- Loaded Sample
+-- Total Difference is: 1.1347997188568115
+-- MATCH adam.jpg
+-- Published: 6
+-- Published to Device Warnings Channel
+
+-- FACENET LIVE INFERENCE ENDED:  2018-06-09 20:28:43.910364
+-- TESTED:  1
+-- IDENTIFIED:  1
+-- TIME(secs): 0.4145240783691406
+
+###.###.#.## - - [09/Jun/2018 20:28:44] "POST /api/TASS/infer HTTP/1.1" 200 -
+-- Movidius Connected
+-- Allocated TASS Graph OK
+-- FACENET LIVE INFERENCE STARTED:  2018-06-09 20:28:45.242851
+-- Loading Face
+-- Loaded Sample
+-- Total Difference is: 0.8408797383308411
+-- MATCH adam.jpg
+-- Published to Device Warnings Channel
+-- Published: 7
+
+-- FACENET LIVE INFERENCE ENDED:  2018-06-09 20:28:45.715089
+-- TESTED:  1
+-- IDENTIFIED:  1
+-- TIME(secs): 0.47223973274230957
+
+###.###.#.## - - [09/Jun/2018 20:28:46] "POST /api/TASS/infer HTTP/1.1" 200 -
+-- Movidius Connected
+-- Allocated TASS Graph OK
+-- FACENET LIVE INFERENCE STARTED:  2018-06-09 20:28:46.972748
+-- Loading Face
+-- Loaded Sample
+-- Total Difference is: 0.8204063177108765
+-- MATCH adam.jpg
+-- Published: 8
+-- Published to Device Warnings Channel
+
+-- FACENET LIVE INFERENCE ENDED:  2018-06-09 20:28:47.393894
+-- TESTED:  1
+-- IDENTIFIED:  1
+-- TIME(secs): 0.4211585521697998
+
+###.###.#.## - - [09/Jun/2018 20:28:47] "POST /api/TASS/infer HTTP/1.1" 200 -
+-- Movidius Connected
+-- Allocated TASS Graph OK
+-- FACENET LIVE INFERENCE STARTED:  2018-06-09 20:28:48.622162
+-- Loading Face
+-- Loaded Sample
+-- Total Difference is: 0.8851813673973083
+-- MATCH adam.jpg
+-- Published: 9
+-- Published to Device Warnings Channel
+
+-- FACENET LIVE INFERENCE ENDED:  2018-06-09 20:28:49.001635
+-- TESTED:  1
+-- IDENTIFIED:  1
+-- TIME(secs): 0.3794584274291992
+
+###.###.#.## - - [09/Jun/2018 20:28:49] "POST /api/TASS/infer HTTP/1.1" 200 -
+-- Movidius Connected
+-- Allocated TASS Graph OK
+-- FACENET LIVE INFERENCE STARTED:  2018-06-09 20:28:50.269028
+-- Loading Face
+-- Loaded Sample
+-- Total Difference is: 1.017368733882904
+-- MATCH adam.jpg
+-- Published: 10
+-- Published to Device Warnings Channel
+
+-- FACENET LIVE INFERENCE ENDED:  2018-06-09 20:28:50.666370
+-- TESTED:  1
+-- IDENTIFIED:  1
+-- TIME(secs): 0.397350549697876
+
+###.###.#.## - - [09/Jun/2018 20:28:51] "POST /api/TASS/infer HTTP/1.1" 200 -
+
 ```
 
 ## Build an IoT connected alarm
