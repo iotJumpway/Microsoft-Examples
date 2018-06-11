@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap6="http://schemas.microsoft.com/appx/manifest/uap/windows10/6" xmlns:iot="http://schemas.microsoft.com/appx/manifest/iot/windows10" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" IgnorableNamespaces="uap mp uap6 iot rescap">
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap6="http://schemas.microsoft.com/appx/manifest/uap/windows10/6" xmlns:iot="http://schemas.microsoft.com/appx/manifest/iot/windows10" IgnorableNamespaces="uap mp uap6 iot ">
   <Identity Name="e70be29d-ff74-46a7-b34d-5f42f031281a" Publisher="CN=AMiltonBarker" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="e70be29d-ff74-46a7-b34d-5f42f031281a" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
@@ -23,7 +23,6 @@
     </Application>
   </Applications>
   <Capabilities>
-    <rescap:Capability Name="broadFileSystemAccess" />
     <Capability Name="internetClient" />
     <uap:Capability Name="picturesLibrary" />
     <uap6:Capability Name="graphicsCapture" />
