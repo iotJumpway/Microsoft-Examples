@@ -27,6 +27,13 @@ using Windows.Graphics.Imaging;
 using Windows.Phone.UI.Input;
 using Windows.Storage.FileProperties;
 using Windows.Storage.Streams;
+using System.IO;
+using System.Net;
+using System.Text;
+using System.Reflection;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Windows.UI.Xaml.Media.Imaging;
 
 /*
  * Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT
@@ -60,6 +67,7 @@ namespace IDC_Classifier_GUI
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        GlobalData GlobalData = new GlobalData();
         Speech Speech = new Speech();
         private static readonly Guid RotationKey = new Guid("C380465D-2271-428C-9B83-ECEA3B4A85C1");
 
@@ -94,6 +102,7 @@ namespace IDC_Classifier_GUI
         {
             this.InitializeComponent();
             Speech.Speak("Welcome to the IDC Classifier GUI, please authenticate yourself using the camera.");
+            NavigationCacheMode = NavigationCacheMode.Disabled;
         }
 
         private void Application_Suspending(object sender, SuspendingEventArgs e)
@@ -391,13 +400,28 @@ namespace IDC_Classifier_GUI
 
             try
             {
-                var file = await _captureFolder.CreateFileAsync("SimplePhoto.jpg", CreationCollisionOption.GenerateUniqueName);
+                string datetime = DateTime.Now.ToString("yy-MM-dd") + "-" + DateTime.Now.ToString("hh-mm-ss") + ".jpg";
+                var file = await _captureFolder.CreateFileAsync(datetime, CreationCollisionOption.GenerateUniqueName);
                 Debug.WriteLine("Photo taken! Saving to " + file.Path);
 
                 var photoOrientation = CameraRotationHelper.ConvertSimpleOrientationToPhotoOrientation(_rotationHelper.GetCameraCaptureOrientation());
 
                 await ReencodeAndSavePhotoAsync(stream, file, photoOrientation);
                 Debug.WriteLine("Photo saved!");
+
+                IStorageFile storageFile = await StorageFile.GetFileFromPathAsync(file.Path);
+                IBuffer buffer = await FileIO.ReadBufferAsync(storageFile);
+                byte[] bytes = System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeBufferExtensions.ToArray(buffer);
+                Stream streamer = new MemoryStream(bytes);
+                Windows.Web.Http.HttpStreamContent streamContent = new Windows.Web.Http.HttpStreamContent(streamer.AsInputStream());
+
+                var myFilter = new Windows.Web.Http.Filters.HttpBaseProtocolFilter();
+                myFilter.AllowUI = false;
+                var client = new Windows.Web.Http.HttpClient(myFilter);
+                Windows.Web.Http.HttpResponseMessage result = await client.PostAsync(new Uri("http://"+ GlobalData.ip + ":" + GlobalData.port + GlobalData.endpoint), streamContent);
+                string stringReadResult = await result.Content.ReadAsStringAsync();
+                Debug.WriteLine(stringReadResult);
+
             }
             catch (Exception ex)
             {
@@ -556,7 +580,11 @@ namespace IDC_Classifier_GUI
             RegisterEventHandlers();
             var picturesLibrary = await StorageLibrary.GetLibraryAsync(KnownLibraryId.Pictures);
             // Fall back to the local app storage if the Pictures Library is not available
-            _captureFolder = picturesLibrary.SaveFolder ?? ApplicationData.Current.LocalFolder;
+            
+            //System.IO.Directory.CreateDirectory(Package.Current.InstalledLocation.Path + @"\Captures");
+            //_captureFolder = await StorageFolder.GetFolderFromPathAsync(@"\Captures");
+            _captureFolder = ApplicationData.Current.LocalFolder;
+
         }
 
         /// <summary>
