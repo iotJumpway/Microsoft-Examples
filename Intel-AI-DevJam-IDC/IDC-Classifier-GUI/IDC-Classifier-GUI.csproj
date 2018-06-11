@@ -97,7 +97,7 @@
     </Compile>
     <Compile Include="CameraRotationHelper.cs" />
     <Compile Include="Classes\Speech.cs" />
-    <Compile Include="GlobalData.cs" />
+    <Compile Include="Classes\GlobalData.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
