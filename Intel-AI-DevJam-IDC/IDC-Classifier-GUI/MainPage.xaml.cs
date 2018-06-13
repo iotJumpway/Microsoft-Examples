@@ -34,6 +34,10 @@ using System.Reflection;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.Data.Json;
+using Newtonsoft.Json.Linq;
+
+
 
 /*
  * Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT
@@ -148,7 +152,6 @@ namespace IDC_Classifier_GUI
             _isActivePage = false;
             await SetUpBasedOnStateAsync();
         }
-
 
         #region Event handlers
         private async void Window_VisibilityChanged(object sender, VisibilityChangedEventArgs args)
@@ -396,6 +399,7 @@ namespace IDC_Classifier_GUI
             var stream = new InMemoryRandomAccessStream();
 
             Debug.WriteLine("Taking photo...");
+            Speech.Speak("Thank you, authenticating you now.");
             await _mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), stream);
 
             try
@@ -421,6 +425,21 @@ namespace IDC_Classifier_GUI
                 Windows.Web.Http.HttpResponseMessage result = await client.PostAsync(new Uri("http://"+ GlobalData.ip + ":" + GlobalData.port + GlobalData.endpoint), streamContent);
                 string stringReadResult = await result.Content.ReadAsStringAsync();
                 Debug.WriteLine(stringReadResult);
+
+                JToken token = JObject.Parse(stringReadResult);
+                int identified = (int)token.SelectToken("Results");
+                string person = (string)token.SelectToken("ResponseMessage");
+
+                if (identified != 0)
+                {
+                    Debug.WriteLine("Identified " + identified);
+                    Speech.Speak("Welcome back " + person);
+                    this.Frame.Navigate(typeof(AppHome));
+                }
+                else
+                {
+                    Speech.Speak("Sorry we cannot authorise your request");
+                }
 
             }
             catch (Exception ex)

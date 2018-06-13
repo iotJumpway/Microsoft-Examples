@@ -95,7 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CameraRotationHelper.cs" />
+    <Compile Include="Classes\CameraRotationHelper.cs" />
     <Compile Include="Classes\Speech.cs" />
     <Compile Include="Classes\GlobalData.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -113,6 +113,40 @@
     <None Include="IDC-Classifier-GUI_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\9175_idx5_x101_y251_class0.png" />
+    <Content Include="Data\9175_idx5_x101_y301_class0.png" />
+    <Content Include="Data\9175_idx5_x101_y351_class0.png" />
+    <Content Include="Data\9175_idx5_x101_y401_class0.png" />
+    <Content Include="Data\9175_idx5_x151_y251_class0.png" />
+    <Content Include="Data\9175_idx5_x151_y301_class0.png" />
+    <Content Include="Data\9175_idx5_x151_y351_class0.png" />
+    <Content Include="Data\9175_idx5_x1751_y151_class1.png" />
+    <Content Include="Data\9175_idx5_x1751_y201_class1.png" />
+    <Content Include="Data\9175_idx5_x1751_y251_class1.png" />
+    <Content Include="Data\9175_idx5_x1801_y151_class1.png" />
+    <Content Include="Data\9175_idx5_x1801_y201_class1.png" />
+    <Content Include="Data\9175_idx5_x1801_y251_class1.png" />
+    <Content Include="Data\9175_idx5_x1851_y151_class1.png" />
+    <Content Include="Data\9175_idx5_x1851_y201_class1.png" />
+    <Content Include="Data\9175_idx5_x1851_y251_class1.png" />
+    <Content Include="Data\9175_idx5_x1901_y201_class1.png" />
+    <Content Include="Data\9175_idx5_x201_y251_class0.png" />
+    <Content Include="Data\9175_idx5_x201_y301_class0.png" />
+    <Content Include="Data\9175_idx5_x201_y351_class0.png" />
+    <Content Include="Data\9175_idx5_x251_y201_class0.png" />
+    <Content Include="Data\9175_idx5_x251_y251_class0.png" />
+    <Content Include="Data\9175_idx5_x251_y301_class0.png" />
+    <Content Include="Data\9175_idx5_x251_y501_class0.png" />
+    <Content Include="Data\9175_idx5_x301_y251_class0.png" />
+    <Content Include="Data\9175_idx5_x301_y501_class0.png" />
+    <Content Include="Data\9175_idx5_x301_y551_class0.png" />
+    <Content Include="Data\9175_idx5_x301_y601_class0.png" />
+    <Content Include="Data\9175_idx5_x301_y651_class0.png" />
+    <Content Include="Data\9175_idx5_x351_y601_class0.png" />
+    <Content Include="Data\9175_idx5_x51_y301_class0.png" />
+    <Content Include="Data\9175_idx5_x51_y351_class0.png" />
+    <Content Include="Data\9175_idx5_x51_y401_class0.png" />
+    <Content Include="Data\9175_idx5_x51_y451_class0.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -140,10 +174,11 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.5</Version>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>11.0.2</Version>
+    </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Captures\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

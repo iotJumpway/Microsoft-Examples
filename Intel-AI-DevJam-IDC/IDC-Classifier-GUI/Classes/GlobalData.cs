@@ -8,8 +8,8 @@ namespace IDC_Classifier_GUI
 {
     class GlobalData
     {
-        public string ip = "";
-        public string port = "";
-        public string endpoint = "";
+        public string ip = "192.168.1.50";
+        public string port = "8080";
+        public string endpoint = "/api/TASS/infer";
     }
 }
