@@ -433,7 +433,6 @@ namespace IDC_Classifier_GUI
                 if (identified != 0)
                 {
                     Debug.WriteLine("Identified " + identified);
-                    Speech.Speak("Welcome back " + person);
                     this.Frame.Navigate(typeof(AppHome));
                 }
                 else
