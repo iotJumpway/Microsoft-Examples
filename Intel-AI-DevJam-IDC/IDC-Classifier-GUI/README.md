@@ -35,6 +35,12 @@ You should have already downloaded the repository source code when you completed
 
 You can test that the project is able to access your camera by pressing the run button in the Visual Studio main toolbar. This will first check for permissions and then display the camera stream in the GUI.
 
+![Testing The Universal Windows Application](images/permissions.jpg)
+
+![Testing The Universal Windows Application](images/camera-screen.jpg)
+
+![Testing The Universal Windows Application](images/slides.jpg)
+
 **Get Involved** 
 This project is open sourced under the MIT license. All contributions are welcome, you can choose from any of the features list below or submit your own features for review via a pull request. 
 
@@ -45,13 +51,6 @@ Below you will find any features that will be implemented. Pull requests are wel
 Below you will find all known bugs in the application. Each bug has a corresponding issue in the repo issues area. Pull requests are welcome.
 
 - [KNOWN BUG: Crashes after permissions](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/issues/1 "KNOWN BUG: Crashes after permissions")
-
-
-![Testing The Universal Windows Application](images/permissions.jpg)
-
-![Testing The Universal Windows Application](images/camera-screen.jpg)
-
-![Testing The Universal Windows Application](images/slides.jpg)
 
 ## Bugs/Issues
 
