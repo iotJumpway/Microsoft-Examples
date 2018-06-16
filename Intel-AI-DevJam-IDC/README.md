@@ -34,7 +34,7 @@ The **TASS Movidius Facenet Classifier** uses **Siamese Neural Networks** and **
 
 ## Universal Windows Application
 
-![Universal Windows Application](../images/IoT-JumpWay-Microsoft-Examples.jpg)
+![Testing The Universal Windows Application](IDC-Classifier-GUI/images/slides.jpg)
 
 A **Universal Windows Application** allows training and querying the **IDC and facial recognition classifiers**, facial recognition training requires 1 image per person to be able to identify them. The **Windows Universal Application** also allows uploading **histology images** of **IDC** positive or negative slides for classification. 
 
