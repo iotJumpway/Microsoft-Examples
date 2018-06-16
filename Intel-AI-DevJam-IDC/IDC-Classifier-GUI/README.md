@@ -74,7 +74,7 @@ Click on the **Classify All Images** button to begin the classification process.
 
 ## Results
 
-As mentioned the images were purposely chosen to challenge the network on false negatives and positives. Ideally there would be 0 of either, but the best case scenario with misclassification is false negatives, as it would be better to incorrectly predict non cancerous as cancercerous than it would be to predict cancerous as non cancerous.
+As mentioned the images were purposely chosen to challenge the network on false negatives and positives. Ideally there would be 0 of either, but the best case scenario with misclassification is false positives, as it would be better to incorrectly predict non cancerous as cancercerous than it would be to predict cancerous as non cancerous.
 
 The application has been set up to detect if a test classification is correct by checking for a string in file name to compare against the prediction. In this applications case, it will check negative predictions to see if the string **class0** exists in the file name, and for positive predictions it will check for **class1**.
 

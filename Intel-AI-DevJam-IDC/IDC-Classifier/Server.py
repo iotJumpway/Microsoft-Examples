@@ -217,8 +217,8 @@ def TASSinference():
         if valid.endswith('.jpg') or valid.endswith('.jpeg') or valid.endswith('.png') or valid.endswith('.gif'):
 
             valid_output = FacenetHelpers.infer(cv2.imread(validDir+valid), Server.fgraph)
-
-            if (FacenetHelpers.match(valid_output, test_output)):
+            known, confidence = FacenetHelpers.match(valid_output, test_output)
+            if (known=="True"):
                 identified = identified + 1
                 print("-- MATCH "+valid)
                 break
@@ -231,7 +231,7 @@ def TASSinference():
                 "WarningType":"CCTV",
                 "WarningOrigin": Server._configs["Cameras"][0]["ID"],
                 "WarningValue": "RECOGNISED",
-                "WarningMessage":valid+" Detected"
+                "WarningMessage":valid + " Detected With Confidence " + str(confidence)
             }
         )
 
@@ -243,7 +243,7 @@ def TASSinference():
                 "WarningType":"CCTV",
                 "WarningOrigin": Server._configs["Cameras"][0]["ID"],
                 "WarningValue": "INTRUDER",
-                "WarningMessage":"INTRUDER"
+                "WarningMessage": " Intruder Detected With Confidence " + str(confidence)
             }
         )
 
@@ -262,15 +262,21 @@ def TASSinference():
 
     if identified:
 
-        message = valid+" Detected"
+        validPerson = os.path.splitext(valid)[0]
+
+        message = validPerson +" Detected With Confidence " + str(confidence)
+        person = validPerson
 
     else:
 
-        message = "Intruder Detected!"
+        message = "Intruder Detected With Confidence " + str(confidence)
+        person = "Intruder"
 
     response = {
         'Response': 'OK',
         'Results': identified,
+        'Person': validPerson,
+        'Confidence': confidence,
         'ResponseMessage': message
     }
 
@@ -349,7 +355,7 @@ def IDCinference():
                     "WarningType":"CCTV",
                     "WarningOrigin": Server._configs["Cameras"][0]["ID"],
                     "WarningValue": "RECOGNISED",
-                    "WarningMessage":"IDC Detected"
+                    "WarningMessage":"IDC Detected With Confidence " + output[top_inds[0]]
                 }
             )
 
@@ -365,7 +371,7 @@ def IDCinference():
                     "WarningType":"CCTV",
                     "WarningOrigin": Server._configs["Cameras"][0]["ID"],
                     "WarningValue": "NOT RECOGNISED",
-                    "WarningMessage":"IDC Detected"
+                    "WarningMessage":"IDC Not Detected With Confidence " + output[top_inds[0]]
                 }
             )
 
@@ -398,15 +404,16 @@ def IDCinference():
 
     if identified:
 
-        message = "IDC Detected!"
+        message = "IDC Detected With Confidence " + output[top_inds[0]]
 
     else:
 
-        message = "IDC Not Detected!"
+        message = "IDC Not Detected With Confidence " + output[top_inds[0]]
 
     response = {
         'Response': 'OK',
         'Results': identified,
+        'Confidence': str(output[top_inds[0]]),
         'ResponseMessage': message
     }
 
