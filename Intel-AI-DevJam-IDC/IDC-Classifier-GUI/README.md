@@ -37,17 +37,27 @@ You can test that the project is able to access your camera by pressing the run 
 
 ![Testing The Universal Windows Application](images/permissions.jpg)
 
+Run the app and as the app starts up, it will ask you for camera and microphone permissions (microphone is currently unused at this stage in development). Once you accept the permissions the camera should start up and display on the screen. 
+
 ![Testing The Universal Windows Application](images/camera-screen.jpg)
+
+There is a known bug related to this part of the application which uses code from the [Windows Universal Samples: Basic camera app sample](https://github.com/Microsoft/Windows-universal-samples/tree/master/Samples/CameraStarterKit "Windows Universal Samples: Basic camera app sample"). You may need to restart the application a number of times before your camera loads. 
+
+For this to work it is neccessary for you to have added your photo to the known data folder of the [Facial Classifiers](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier "Facial Classifiers"). 
+
+Click on the camera button on the right hand side to authenticate yourself. 
 
 ![Testing The Universal Windows Application](images/slides.jpg)
 
-**Get Involved** 
+You should now be authenticated onto the system, to add other people that have permissions to use the use the system simply add their photo to the known data folder in the IDC Classifier.
+
+## Get Involved 
 This project is open sourced under the MIT license. All contributions are welcome, you can choose from any of the features list below or submit your own features for review via a pull request. 
 
-**Features List** 
+## Features List 
 Below you will find any features that will be implemented. Pull requests are welcome.
 
-**KNOWN BUGS** 
+## KNOWN BUGS 
 Below you will find all known bugs in the application. Each bug has a corresponding issue in the repo issues area. Pull requests are welcome.
 
 - [KNOWN BUG: Crashes after permissions](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/issues/1 "KNOWN BUG: Crashes after permissions")
