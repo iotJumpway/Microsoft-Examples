@@ -105,7 +105,7 @@ namespace IDC_Classifier_GUI
         public MainPage()
         {
             this.InitializeComponent();
-            Speech.Speak("Welcome to the IDC Classifier GUI, please authenticate yourself using the camera.");
+            Speech.Speak("Welcome to the Intel AI DevJam IDC Classifier GUI Demo, please authenticate yourself using the camera.");
             NavigationCacheMode = NavigationCacheMode.Disabled;
         }
 
@@ -422,13 +422,13 @@ namespace IDC_Classifier_GUI
                 var myFilter = new Windows.Web.Http.Filters.HttpBaseProtocolFilter();
                 myFilter.AllowUI = false;
                 var client = new Windows.Web.Http.HttpClient(myFilter);
-                Windows.Web.Http.HttpResponseMessage result = await client.PostAsync(new Uri("http://"+ GlobalData.ip + ":" + GlobalData.port + GlobalData.endpoint), streamContent);
+                Windows.Web.Http.HttpResponseMessage result = await client.PostAsync(new Uri(GlobalData.protocol + GlobalData.ip + ":" + GlobalData.port + GlobalData.endpoint), streamContent);
                 string stringReadResult = await result.Content.ReadAsStringAsync();
                 Debug.WriteLine(stringReadResult);
 
                 JToken token = JObject.Parse(stringReadResult);
                 int identified = (int)token.SelectToken("Results");
-                string person = (string)token.SelectToken("ResponseMessage");
+                string Response = (string)token.SelectToken("ResponseMessage");
 
                 if (identified != 0)
                 {

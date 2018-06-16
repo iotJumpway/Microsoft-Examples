@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IDC_Classifier_GUI.Classes;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -10,6 +12,7 @@ using Windows.Graphics.Imaging;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Search;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -22,12 +25,94 @@ namespace IDC_Classifier_GUI
     /// </summary>
     public sealed partial class AppHome : Page
     {
+        private GlobalData GlobalData = new GlobalData();
+        private Speech Speech = new Speech();
+
         public AppHome()
         {
             this.InitializeComponent();
+            Speech.Speak("Images loading");
             this.DisplayAllFiles();
         }
 
+        private async Task ClassifyAllFiles()
+        {
+            Debug.WriteLine("-- GETTING FILES");
+            StorageFolder appInstalledFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            StorageFolder dataFolder = await appInstalledFolder.GetFolderAsync("Data");
+            IReadOnlyList<StorageFile> fileList = await dataFolder.GetFilesAsync();
+
+            var result = new ObservableCollection<BitmapImage>();
+            Speech.Speak("Processing of images for Invasive Ductal Carcinoma initiating");
+            int received = 0; 
+            int counter = 0;
+            int identified = 0;
+            int incorrect = 0;
+            int fps = 0;
+            int fns = 0;
+            foreach (StorageFile file in fileList)
+            {
+                Debug.WriteLine(file.Name);
+                IBuffer buffer = await FileIO.ReadBufferAsync(file);
+                byte[] bytes = buffer.ToArray();
+                Stream streamer = new MemoryStream(bytes);
+                Windows.Web.Http.HttpStreamContent streamContent = new Windows.Web.Http.HttpStreamContent(streamer.AsInputStream());
+
+                var myFilter = new Windows.Web.Http.Filters.HttpBaseProtocolFilter();
+                myFilter.AllowUI = false;
+                var client = new Windows.Web.Http.HttpClient(myFilter);
+                Windows.Web.Http.HttpResponseMessage results = await client.PostAsync(new Uri(GlobalData.protocol + GlobalData.ip + ":" + GlobalData.port + GlobalData.endpointIDC), streamContent);
+                string stringReadResult = await results.Content.ReadAsStringAsync();
+                Debug.WriteLine(stringReadResult);
+
+                JToken token = JObject.Parse(stringReadResult);
+                received = (int)token.SelectToken("Results");
+                string Response = (string)token.SelectToken("ResponseMessage");
+
+                if (received != 0)
+                {
+                    if (file.Name.Contains("class1"))
+                    {
+                        Debug.WriteLine("CORRECT: IDC correctly detected in image " + (counter + 1) + " " + file.Name);
+                        Speech.Speak("Processed image " + (counter + 1));
+                        identified = identified + 1;
+
+                    }
+                    else
+                    {
+                        Debug.WriteLine("FALSE POSITIVE: IDC incorrectly detected in image " + (counter + 1) + " " + file.Name);
+                        Speech.Speak("Processed image " + (counter + 1));
+                        fps = fps + 1;
+                        incorrect = incorrect + 1;
+                    }
+
+                }
+                else
+                {
+                    if (file.Name.Contains("class0"))
+                    {
+                        Debug.WriteLine("CORRECT: IDC correctly not detected in image " + (counter + 1) + " " + file.Name);
+                        Speech.Speak("Processed image " + (counter + 1));
+                        identified = identified + 1;
+
+                    }
+                    else
+                    {
+                        Debug.WriteLine("FALSE NEGATIVE: IDC incorrectly not detected in image " + (counter + 1) + " " + file.Name);
+                        Speech.Speak("Processed image " + (counter + 1));
+                        fns = fns + 1;
+                        incorrect = incorrect + 1;
+                    }
+                }
+                counter++;
+                if (counter == (GlobalData.expectedCount*2))
+                {
+                    Speech.Speak(identified + " positive examples detected out of " + GlobalData.expectedCount + " positive & " + GlobalData.expectedCount + " negative examples. " + incorrect + " incorrect, " + fps + " false positives and " + fns + " false negatives.");
+                    Debug.WriteLine(identified + " positive examples detected  out of " + GlobalData.expectedCount + " positive & " + GlobalData.expectedCount + " negative examples. " + incorrect + " incorrect, " + fps + " false positives and " + fns+" false negatives.");
+                }
+                System.Threading.Thread.Sleep(1000);
+            }
+        }
         private async Task DisplayAllFiles()
         {
             Debug.WriteLine("-- GETTING FILES");
@@ -35,15 +120,35 @@ namespace IDC_Classifier_GUI
             StorageFolder dataFolder = await appInstalledFolder.GetFolderAsync("Data");
             IReadOnlyList<StorageFile> fileList = await dataFolder.GetFilesAsync();
 
+            this.ImageHolder.Opacity = 0;
+            this.ImageHolder.Width = 1500;
+            this.ImageHolder.Height = 1500;
+
             this.ImageHolder.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+            this.ImageHolder.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength() });
+            this.ImageHolder.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength() });
             this.ImageHolder.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength() });
             this.ImageHolder.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength() });
             this.ImageHolder.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength() });
             this.ImageHolder.RowDefinitions.Add(new RowDefinition() { Height = new GridLength() });
 
+            Button button = new Button();
+            button.Name = "IDC_Classify";
+            button.Content = "Classify All Images";
+            button.Click += IDC_Classify_Click;
+            button.Width = 250;
+            button.Height = 75;
+            button.Foreground = new SolidColorBrush(Windows.UI.Colors.White);
+            button.SetValue(Grid.ColumnProperty, 6);
+            button.SetValue(Grid.RowProperty, 0);
+            this.ImageHolder.Children.Add(button);
+
+            this.ImageHolder.RowDefinitions.Add(new RowDefinition() { Height = new GridLength() });
+
             var result = new ObservableCollection<BitmapImage>();
             var i = 0;
-            int row = 0;
+            var row = 1;
+            var column = 0;
             foreach (StorageFile file in fileList)
             {
                 Debug.WriteLine(file.Name);
@@ -65,38 +170,29 @@ namespace IDC_Classifier_GUI
                     var source = new SoftwareBitmapSource();
                     await source.SetBitmapAsync(softwareBitmap);
 
+                    if (i != 0 && i % 6 == 0)
+                    {
+                        Debug.WriteLine("-- New Image Row "+ row);
+                        this.ImageHolder.RowDefinitions.Add(
+                            new RowDefinition() { Height = GridLength.Auto });
+                        column = 0;
+                        row++;
+                    }
+
                     Image image = new Image();
                     image.Source = softwareBitmapSource;
                     image.Name = file.Name;
                     image.Width = 250;
                     image.Height = 250;
-                    image.SetValue(Grid.ColumnProperty, i);
+                    image.SetValue(Grid.ColumnProperty, column);
                     image.SetValue(Grid.RowProperty, row);
                     this.ImageHolder.Children.Add(image);
 
-                    if (i != 0 && i % 4 == 0)
-                    {
-                        Debug.WriteLine("-- New Image Row "+ row);
-                        this.ImageHolder.RowDefinitions.Add(
-                            new RowDefinition() { Height = GridLength.Auto });
-                        i = -1;
-                        row++;
-                    }
-
+                    column++;
                     i++;
                 }
-
-                this.ImageHolder.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength() });
-                Button button = new Button();
-                button.Content = "Classify All Images";
-                //button.Click += SubscribeButton_Click;
-                button.Width = 250;
-                button.Height = 75;
-                button.Foreground = new SolidColorBrush(Windows.UI.Colors.Black);
-                button.SetValue(Grid.ColumnProperty, 5);
-                button.SetValue(Grid.RowProperty, 0);
-                this.ImageHolder.Children.Add(button);
             }
+            this.ImageHolder.Opacity = 1;
 
         }
         private async Task GetFolders()
@@ -127,6 +223,14 @@ namespace IDC_Classifier_GUI
             IReadOnlyList<StorageFile> image_files = await k.GetFilesAsync();
 
         }
+        public async static Task<byte[]> ImageToBytes(BitmapImage image)
+        {
+            RandomAccessStreamReference streamRef = RandomAccessStreamReference.CreateFromUri(image.UriSource);
+            IRandomAccessStreamWithContentType streamWithContent = await streamRef.OpenReadAsync();
+            byte[] buffer = new byte[streamWithContent.Size];
+            await streamWithContent.ReadAsync(buffer.AsBuffer(), (uint)streamWithContent.Size, InputStreamOptions.None);
+            return buffer;
+        }
 
         private void Camera_Click(object sender, RoutedEventArgs e)
         {
@@ -137,6 +241,12 @@ namespace IDC_Classifier_GUI
         {
             this.Frame.Navigate(typeof(AppHome));
         }
+
+        private void IDC_Classify_Click(object sender, RoutedEventArgs e)
+        {
+            ClassifyAllFiles();
+        }
+        
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {

@@ -8,8 +8,14 @@ namespace IDC_Classifier_GUI
 {
     class GlobalData
     {
+        public string protocol = "http://";
         public string ip = "192.168.1.50";
-        public string port = "8080";
+        public int port = 8080;
         public string endpoint = "/api/TASS/infer";
+        public string endpointIDC = "/api/IDC/infer";
+
+        public int expectedCount = 6;
+
+
     }
 }
