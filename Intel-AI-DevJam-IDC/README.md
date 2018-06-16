@@ -10,6 +10,8 @@ The **Intel® AI DevJam Demo GUI** uses a **Windows application** to communicate
 
 The goal of this project is to intentionally try to trick the model by using very similar, but opposite class, images from a small set of testing data that I believe humans may have difficulty telling apart. A larger set of testing data is provided to compare how the model works on larger datasets. 
 
+![Intel® Movidius](images/ICML-AI-DevJam.jpg)
+
 ## Jump To Tutorials & Source Codes
 
 - [IDC & Facial Classifiers](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier "IDC & Facial Classifiers") Tutorial & Source Code
@@ -17,8 +19,6 @@ The goal of this project is to intentionally try to trick the model by using ver
 - [Universal Windows Application](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier-GUI "Universal Windows Application") Tutorial & Source Code
 
 - [IoT Device](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/Dev-Kit-IoT-Alarm "IoT Device") Tutorial & Source Code
-
-![Intel® Movidius](images/ICML-AI-DevJam.jpg)
 
 The **Intel AI DevJam Demo** uses a **Windows application** to communicate with a **facial recognition classifier** and a classifier trained to detect **Invasive Ductal Carcinoma (Breast cancer)** in **histology images**. The project combines the  [Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT](https://github.com/iotJumpway/IoT-JumpWay-Intel-Examples/tree/master/Intel-Movidius/IDC-Classification "Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT") and [TASS Movidius Facenet Classifier](https://github.com/iotJumpway/IoT-JumpWay-Intel-Examples/tree/master/Intel-Movidius/TASS/Facenet "TASS Movidius Facenet Classifier") projects.
 
