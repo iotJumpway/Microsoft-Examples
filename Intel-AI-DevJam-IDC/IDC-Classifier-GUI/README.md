@@ -70,20 +70,32 @@ Click on the camera button on the right hand side to authenticate yourself. The 
 
 ![Testing The Universal Windows Application](images/slides.jpg)
 
+Click on the **Classify All Images** button to begin the classification process. The application will loop through the data and send it to the server for the classification. As each image is processed the application will notify you using voice, once the application finishes it will notify you of positive identifications, 
+
+## Results
+
+As mentioned the images were purposely chosen to challenge the network on false negatives and positives. Ideally there would be 0 of either, but the best case scenario with misclassification is false negatives, as it would be better to incorrectly predict non cancerous as cancercerous than it would be to predict cancerous as non cancerous.
+
+The application has been set up to detect if a test classification is correct by checking for a string in file name to compare against the prediction. In this applications case, it will check negative predictions to see if the string **class0** exists in the file name, and for positive predictions it will check for **class1**.
+
+The logs of the output can be viewed in the output area of Visual Studio. Here it will display the info of each image processed, the prediction and whether it is false positive/false negative or correct/incorrect.
+
 ## Get Involved 
 This project is open sourced under the MIT license. All contributions are welcome, you can choose from any of the features list below or submit your own features for review via a pull request. 
 
 ## Features List 
 Below you will find any features that will be implemented. Pull requests are welcome.
 
-## KNOWN BUGS 
-Below you will find all known bugs in the application. Each bug has a corresponding issue in the repo issues area. Pull requests are welcome.
-
-- [KNOWN BUG: Crashes after permissions](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/issues/1 "KNOWN BUG: Crashes after permissions")
+- [IoTJumpWay Integration](https://www.iotjumpway.tech "IoTJumpWay Integration")
 
 ## Bugs/Issues
 
 Please feel free to create issues for bugs and general issues you come across whilst using this or any other IoT JumpWay Microsoft repo issues: [IoT-JumpWay-Microsoft-Examples Github Issues](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/issues "IoT-JumpWay-Microsoft-Examples Github Issues")
+
+## Known Bugs
+Below you will find all known bugs in the application. Each bug has a corresponding issue in the repo issues area. Pull requests are welcome.
+
+- [KNOWN BUG: Crashes after permissions](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/issues/1 "KNOWN BUG: Crashes after permissions")
 
 ## Contributors
 
