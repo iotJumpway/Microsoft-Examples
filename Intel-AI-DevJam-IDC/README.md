@@ -8,7 +8,15 @@ The **Intel AI DevJam Demo** project provides the source codes and tutorials for
 
 The **Intel® AI DevJam Demo GUI** uses a **Windows application** to communicate with a **facial recognition classifier** and a classifier trained to detect **Invasive Ductal Carcinoma (Breast cancer)** in **histology images**.
 
-The goal of this project is to intentionally try to trick the model by using very similar, but opposite class, images from a small set of testing data that I believe humans may have difficulty telling apart. A larger set of testing data is provided to compare how the model works on larger datasets.
+The goal of this project is to intentionally try to trick the model by using very similar, but opposite class, images from a small set of testing data that I believe humans may have difficulty telling apart. A larger set of testing data is provided to compare how the model works on larger datasets. 
+
+## Jumpw To Tutorials & Source Codes
+
+- [IDC & Facial Classifiers](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier "IDC & Facial Classifiers")
+
+- [Universal Windows Application](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier-GUI "Universal Windows Application")
+
+- [IoT Device](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/Dev-Kit-IoT-Alarm "IoT Device")
 
 ![Intel® Movidius](images/ICML-AI-DevJam.jpg)
 
@@ -44,15 +52,7 @@ The **TASS Movidius Facenet Classifier** uses **Siamese Neural Networks** and **
 
 ![Raspberry Pi 3b](IDC-Classifier/images/RPI3.jpg)
 
-An IoT connected alarm awaits messages for the results of the **facial** and **IDC** classification. In the event an unauthorized user is detected or IDC is detected an alarm (buzzer) is triggered and a red LED lights up, if both classifications are ok a blue LED lights up. 
-
-## Tutorials & Source Codes
-
-- [IDC & Facial Classifiers](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier "IDC & Facial Classifiers")
-
-- Universal Windows Application (Coming Soon)
-
-- [IoT Device](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/Dev-Kit-IoT-Alarm "IoT Device")
+An IoT connected alarm awaits messages for the results of the **facial** and **IDC** classification. In the event an unauthorized user is detected or IDC is detected an alarm (buzzer) is triggered and a red LED lights up, if both classifications are ok a blue LED lights up.
 
 ## Bugs/Issues
 
