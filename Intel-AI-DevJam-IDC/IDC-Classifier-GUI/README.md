@@ -78,9 +78,70 @@ Click on the **Classify All Images** button to begin the classification process.
 
 As mentioned the images were purposely chosen to challenge the network on false negatives and positives. Ideally there would be 0 of either, but the best case scenario with misclassification is false positives, as it would be better to incorrectly predict non cancerous as cancercerous than it would be to predict cancerous as non cancerous.
 
-The application has been set up to detect if a test classification is correct by checking for a string in file name to compare against the prediction. In this applications case, it will check negative predictions to see if the string **class0** exists in the file name, and for positive predictions it will check for **class1**.
+The application has been set up to detect if a test classification is correct by checking for a string in file name to compare against the prediction. In this applications case, it will check negative predictions to see if the string **class0** exists in the file name, and for positive predictions it will check for **class1**, this felps to determine whether they are false negatives or false positives.
 
-The logs of the output can be viewed in the output area of Visual Studio. Here it will display the info of each image processed, the prediction and whether it is false positive/false negative or correct/incorrect.
+![Testing The Universal Windows Application](images/output.jpg)
+
+The logs of the output can be viewed in the output area of Visual Studio. Here it will display the info of each image processed, the prediction and whether it is false positive/false negative or correct/incorrect. What I hoped not see, but expected to see, was false negatives as I had chosen a testing dataset that I believed would possibly trick the classification model. 
+
+The console logs of my testing below show that the IDC Classifier identified 4 of the positive examples as negative, although the confidence was low for 3 of these predictions between 0.726 & 0.807.  
+
+```
+Processing of images for Invasive Ductal Carcinoma initiating
+8975_idx5_x301_y801_class0.png
+{"Confidence": "1.0", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 1.0"}
+Processed image 1
+CORRECT: IDC correctly not detected in image 1 8975_idx5_x301_y801_class0.png with 1 confidence.
+8975_idx5_x351_y1051_class0.png
+{"Confidence": "0.968", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 0.968"}
+Processed image 2
+CORRECT: IDC correctly not detected in image 2 8975_idx5_x351_y1051_class0.png with 0.968 confidence.
+8975_idx5_x1001_y1351_class1.png
+{"Confidence": "0.967", "Response": "OK", "Results": 1, "ResponseMessage": "IDC Detected With Confidence 0.967"}
+Processed image 3
+CORRECT: IDC correctly detected in image 3 8975_idx5_x1001_y1351_class1.png with 0.967 confidence.
+8975_idx5_x1001_y1451_class1.png
+{"Confidence": "0.9526", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 0.9526"}
+Processed image 4
+FALSE NEGATIVE: IDC incorrectly not detected in image 4 8975_idx5_x1001_y1451_class1.png with 0.9526 confidence.
+8975_idx5_x1051_y1251_class1.png
+{"Confidence": "0.807", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 0.807"}
+Processed image 5
+FALSE NEGATIVE: IDC incorrectly not detected in image 5 8975_idx5_x1051_y1251_class1.png with 0.807 confidence.
+8975_idx5_x1201_y1801_class1.png
+{"Confidence": "0.9644", "Response": "OK", "Results": 1, "ResponseMessage": "IDC Detected With Confidence 0.9644"}
+Processed image 6
+CORRECT: IDC correctly detected in image 6 8975_idx5_x1201_y1801_class1.png with 0.9644 confidence.
+8975_idx5_x1251_y1251_class1.png
+{"Confidence": "0.851", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 0.851"}
+Processed image 7
+FALSE NEGATIVE: IDC incorrectly not detected in image 7 8975_idx5_x1251_y1251_class1.png with 0.851 confidence.
+8975_idx5_x1251_y1901_class1.png
+{"Confidence": "0.726", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 0.726"}
+Processed image 8
+FALSE NEGATIVE: IDC incorrectly not detected in image 8 8975_idx5_x1251_y1901_class1.png with 0.726 confidence.
+8975_idx5_x3501_y1701_class0.png
+{"Confidence": "0.9194", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 0.9194"}
+Processed image 9
+CORRECT: IDC correctly not detected in image 9 8975_idx5_x3501_y1701_class0.png with 0.9194 confidence.
+8975_idx5_x3501_y1751_class0.png
+{"Confidence": "0.942", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 0.942"}
+Processed image 10
+CORRECT: IDC correctly not detected in image 10 8975_idx5_x3501_y1751_class0.png with 0.942 confidence.
+8975_idx5_x3501_y1801_class0.png
+{"Confidence": "0.984", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 0.984"}
+Processed image 11
+CORRECT: IDC correctly not detected in image 11 8975_idx5_x3501_y1801_class0.png with 0.984 confidence.
+8975_idx5_x3501_y1851_class0.png
+{"Confidence": "0.99", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 0.99"}
+Processed image 12
+CORRECT: IDC correctly not detected in image 12 8975_idx5_x3501_y1851_class0.png with 0.99 confidence.
+2 positive examples detected out of 6 positive & 6 negative examples. 4 incorrect, 0 false positives and 4 false negatives.
+```
+
+![Testing The Universal Windows Application](images/Opposing-Classes.jpg)
+
+You can see the images that were incorrectly classified along with images from opposing classes that I believed may be able to trick the IDC Classifer in the image above. 
 
 ## Get Involved 
 This project is open sourced under the MIT license. All contributions are welcome, you can choose from any of the features list below or submit your own features for review via a pull request. 
