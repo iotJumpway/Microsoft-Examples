@@ -3,11 +3,13 @@
 
 ![Intel AI DevJam Demo GUI](../IDC-Classifier/images/IDC-Classification.jpg)
 
-## Introduction
+## Abstract
 
-The **Intel AI DevJam Demo GUI** project provides the source codes and tutorials for setting up the same project that will demonstrated at **Intel AI DevJam** at **ICML** (**International Conference on Machine Learning**) in **Sweden**, July 2018.
+The **Intel AI DevJam Demo** project provides the source codes and tutorials for setting up the project that will demonstrated at **Intel AI DevJam** at **ICML** (**International Conference on Machine Learning**) in **Sweden**, July 2018.
 
 The **Intel® AI DevJam Demo GUI** uses a **Windows application** to communicate with a **facial recognition classifier** and a classifier trained to detect **Invasive Ductal Carcinoma (Breast cancer)** in **histology images**.
+
+The goal of this project is to intentionally try to trick the model by using very similar, but opposite class, images from a small set of testing data that I believe humans may have difficulty telling apart. A larger set of testing data is provided in the **DataSets** folder of the GUI project to compare how the model works on larger datasets. 
 
 ## IoT Connectivity
 
@@ -15,7 +17,7 @@ The **Intel® AI DevJam Demo GUI** uses a **Windows application** to communicate
 
 ## Checklist
 
-Make sure you have completed the following steps before continuing to configure the Universal Windows Application. 
+Make sure you have completed the following steps before continuing to configure the Universal Windows Application as you will need them to be waiting for queries or commands before you can complete this tutorial. 
 
 - Setup the [IDC classification server/API](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier "IDC classification server/API").
 
