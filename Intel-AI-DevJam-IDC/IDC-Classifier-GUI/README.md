@@ -59,6 +59,20 @@ Inside the GUI project folder you will find a folder called **Data** and inside 
 
 To add your own data you can remove the images in the **Data** folder and add your own dataset to the folder. Once you have added them to the folder you need to remove any unused images from the directory inside of Visual Studio and then add the new images into the project by right clicking on the **Data** folder, clicking add, and then selecting your new dataset. 
 
+## IDC Classifier Evaluation Results 
+
+The results from the **IDC Classifier Evaluation** were as shown below:
+
+```
+INFO:tensorflow:Global Step 73: Streaming Accuracy: 0.8935 (0.61 sec/step)
+INFO:tensorflow:Global Step 74: Streaming Accuracy: 0.8942 (0.67 sec/step)
+INFO:tensorflow:Final Streaming Accuracy: 0.8941
+```
+
+![Training Accuracy](../IDC-Classifier/Inception/images/validation-accuracy.jpg)
+
+![Training Accuracy](../IDC-Classifier/Inception/images/validation-total-loss.jpg)
+
 ## Testing The Universal Windows Application
 
 ![Testing The Universal Windows Application](images/permissions.jpg)
