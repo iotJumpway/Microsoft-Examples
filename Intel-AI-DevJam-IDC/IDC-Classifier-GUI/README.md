@@ -33,20 +33,21 @@ Make sure you have completed the following steps before continuing to configure 
 
 You should have already downloaded the repository source code when you completed the [IDC classification server/API](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier "IDC classification server/API") setup. Navigate to **IoT-JumpWay-Microsoft-Examples/Intel-AI-DevJam-IDC** and double click the **IDC-Classifier-GUI.sln** file to open the solution in **Visual Studio 2017**.
 
-Inside the [IDC classification GUI Classes folder](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier-GUI/Classes "IDC classification GUI Classes folder") you will find a file called [GlobalData.cs](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier-GUI/Classes "GlobalData.cs"), in here you will find settings that you can use to connect to your IDC Classifier Server. When you start your IDC Classifier Server, the output will show you the IP/FQD and port number.
+You need the application to connect to the server you setup while following the **IDC Classifier** tutorial. Inside the [IDC classification GUI Classes folder](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier-GUI/Classes "IDC classification GUI Classes folder") you will find a file called [GlobalData.cs](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier-GUI/Classes "GlobalData.cs"), in here you will find settings that you can use to connect to your IDC Classifier Server. When you start your IDC Classifier Server, the output will show you the IP/FQD and port number.
 
 ```
-namespace IDC_Classifier_GUI
+class GlobalData
 {
-    class GlobalData
-    {
-        public string ip = "YOUR SERVER IP";
-        public int port = 8080;
-        public string endpoint = "/api/TASS/infer";
-        public string endpointIDC = "/api/IDC/infer";
+    public string protocol = "http://";
+    public string ip = "YOUR SERVER IP";
+    public int port = 8080;
+    public string endpoint = "/api/TASS/infer";
+    public string endpointIDC = "/api/IDC/infer";
+    public string dataFolder = "Data\\1";
+    //public string dataFolder = "Data\\2";
 
-        public int expectedCount = 6;
-    }
+    public double threshold = 0.80;
+    public int expectedCount = 6;
 }
 ```
 
@@ -147,8 +148,29 @@ This was also tested using the [IDC Classifier Test Program](https://github.com/
 
 The second folder located in the **Data** folder can be used to test the classifier on 100 images, 50 negative and 50 positive. These images have been randomly selected and may or may not confuse similar images from seperate classes. 
 
+## Server Settings
 
+You need the application to use the larger IDC test data. You can achieve this by editing the **Classes/GlobalData.cs** file by uncommenting the **Data\\2** folder and commenting out the **Data\\1** folder.
 
+```
+class GlobalData
+{
+    public string protocol = "http://";
+    public string ip = "YOUR SERVER IP";
+    public int port = 8080;
+    public string endpoint = "/api/TASS/infer";
+    public string endpointIDC = "/api/IDC/infer";
+    //public string dataFolder = "Data\\1";
+    public string dataFolder = "Data\\2";
+
+    public double threshold = 0.80;
+    public int expectedCount = 6;
+}
+```
+
+This will start the application using the larger dataset. The process is the same as when we tested the smaller dataset. 
+
+![Testing The Universal Windows Application](images/large-dataset.jpg)
 
 ## Get Involved 
 This project is open sourced under the MIT license. All contributions are welcome, you can choose from any of the features list below or submit your own features for review via a pull request. 
