@@ -244,11 +244,11 @@ Processed image 100
 - 0.89 fscore
 ```
 
-The above shows that on a dataset of 100 images there were 7 incorrect classifications all of which are **false negatives** with a **confidence of 0.90 or higher**. The application marked 16 images as **unsure** and **correctly** identified 27 of the 50 IDC positive images.
-
-![Testing The Universal Windows Application](images/Opposing-Classes-100.jpg) 
+The above shows that on a dataset of 100 images there were 7 incorrect classifications all of which are **false negatives** with a **confidence of 0.90 or higher**. The application marked 16 images as **unsure** and **correctly** identified 27 of the 50 IDC positive images. 
 
 ## False Negatives
+
+![Testing The Universal Windows Application](images/Opposing-Classes-100.jpg)
 
 ```
 8975_idx5_x1001_y1451_class1.png
@@ -289,6 +289,10 @@ Processed image 65
 ```
 
 ## Unsure
+
+![Testing The Universal Windows Application](images/Unsure.jpg)
+
+Our **unsure** classifications allow us to catch classifications that the model did not have high **confidence** on, this could help save lives in the case of captching **false negatives**.
 
 ``` 
 8975_idx5_x1001_y1301_class1.png
