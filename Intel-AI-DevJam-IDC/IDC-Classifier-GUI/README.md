@@ -128,6 +128,7 @@ CORRECT: IDC correctly not detected in image 12 8975_idx5_x3501_y1851_class0.png
 Processed image 12
 
 2 true positives, 0 false positives, 3 false negatives, 6 true negatives, 3 incorrect examples classified, 0.33 accuracy, 1 precision, 0.4 recall, 0.57 fscore
+
 - 2 true positives, 0 false positives, 3 false negatives, 6 true negatives
 - 3 incorrect examples classified
 - 0.33 accuracy
@@ -164,11 +165,11 @@ class GlobalData
     public string dataFolder = "Data\\2";
 
     public double threshold = 0.80;
-    public int expectedCount = 6;
+    public int expectedCount = 50;
 }
 ```
 
-This will start the application using the larger dataset. The process is the same as when we tested the smaller dataset. 
+This will start the application using the larger dataset the next time you run the application. The process is the same as when we tested the smaller dataset. Click on the **Classify All Images** button and the program will start to process the images.
 
 ![Testing The Universal Windows Application](images/large-dataset.jpg)
 

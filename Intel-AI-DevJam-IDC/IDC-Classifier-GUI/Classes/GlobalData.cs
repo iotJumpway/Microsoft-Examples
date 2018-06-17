@@ -17,8 +17,6 @@ namespace IDC_Classifier_GUI
         public string dataFolder = "Data\\2";
 
         public double threshold = 0.80;
-        public int expectedCount = 6;
-
-
+        public int expectedCount = 50;
     }
 }
