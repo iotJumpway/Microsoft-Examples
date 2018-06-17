@@ -149,9 +149,9 @@ This was also tested using the [IDC Classifier Test Program](https://github.com/
 
 ## Testing On A Larger DataSet
 
-![Testing The Universal Windows Application](images/large-dataset.jpg)
+The second folder located in the **Data** folder can be used to test the classifier on 100 images, 50 negative and 50 positive. These images have been randomly selected and may or may not confuse similar images from seperate classes.
 
-The second folder located in the **Data** folder can be used to test the classifier on 100 images, 50 negative and 50 positive. These images have been randomly selected and may or may not confuse similar images from seperate classes. 
+![Testing The Universal Windows Application](images/large-dataset.jpg) 
 
 ## Server Settings
 
