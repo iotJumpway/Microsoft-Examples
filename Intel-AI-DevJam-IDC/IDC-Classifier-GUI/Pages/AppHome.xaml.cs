@@ -45,6 +45,7 @@ namespace IDC_Classifier_GUI
 
             var result = new ObservableCollection<BitmapImage>();
             Speech.Speak("Processing of images for Invasive Ductal Carcinoma initiating");
+            Debug.WriteLine(" ");
             int received = 0; 
             int counter = 0;
             int identified = 0;
@@ -80,6 +81,7 @@ namespace IDC_Classifier_GUI
                         if (confidence >= GlobalData.threshold)
                         {
                             Debug.WriteLine("CORRECT: IDC correctly detected in image " + (counter + 1) + " " + file.Name + " with " + confidence + " confidence.");
+                            Debug.WriteLine(" ");
                             identified = identified + 1;
                         }
                         else
@@ -129,17 +131,20 @@ namespace IDC_Classifier_GUI
                         
                     }
                     Speech.Speak("Processed image " + (counter + 1));
+                    Debug.WriteLine(" ");
                 }
                 counter++;
                 if (counter == (GlobalData.expectedCount*2))
                 {
-                    double accuracy = (((double)tns + (double)identified) / ((double)identified + (double)fps)) / (double)counter;
-                    double precision = (double)identified / ((double)identified + (double)fps);
-                    double recall = (double)identified / ((double)identified + (double)fns);
-                    double fscore = 2 * (double)precision * (double)recall / ((double)precision + (double)recall);
+                    double actualIdentified = (double)identified;
+                    double accuracy = (((double)tns + actualIdentified) / (actualIdentified + (double)fps)) / ((double)counter - unsure);
+                    double precision = actualIdentified / (actualIdentified + (double)fps);
+                    double recall = actualIdentified / (actualIdentified + (double)fns);
+                    double fscore = 2 * ((double)precision * (double)recall / ((double)precision + (double)recall));
 
                     Speech.Speak(identified + " true positives, " + fps + " false positives, " + fns + " false negatives, " + unsure + " unsure, " + tns + " true negatives, " + incorrect + " incorrect examples classified, " + Math.Round(accuracy, 2) + " accuracy, " + Math.Round(precision, 2) + " precision, " + Math.Round(recall, 2) + " recall, " + Math.Round(fscore, 2) + " fscore");
-                
+
+                    Debug.WriteLine(" ");
                     Debug.WriteLine("- " + identified  + " true positives, " + fps + " false positives, " + fns + " false negatives, " + tns + " true negatives");
                     Debug.WriteLine("- " + unsure + " unsure");
                     Debug.WriteLine("- " + incorrect + " incorrect examples classified");

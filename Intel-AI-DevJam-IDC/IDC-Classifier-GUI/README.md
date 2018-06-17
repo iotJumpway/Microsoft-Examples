@@ -75,73 +75,102 @@ Click on the camera button on the right hand side to authenticate yourself. The 
 
 Click on the **Classify All Images** button to begin the classification process. The application will loop through the data and send it to the server for the classification. As each image is processed the application will notify you using voice, once the application finishes it will notify you of positive identifications, 
 
-## Results
+## Inception V3 Results
 
-As mentioned the images were purposely chosen to challenge the network on false negatives and positives. Ideally there would be 0 of either, but the best case scenario with misclassification is false positives, as it would be better to incorrectly predict non cancerous as cancercerous than it would be to predict cancerous as non cancerous.
+These results are from using the [AI DevJam Inception V3 IDC Classifier](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/tree/master/Intel-AI-DevJam-IDC/IDC-Classifier/Inception "AI DevJam Inception V3 IDC Classifier"). As mentioned the images were purposely chosen to challenge the model on false negatives and positives. Ideally there would be 0 of either, but the best case scenario with misclassification is false positives, as it would be better to incorrectly predict non cancerous as cancercerous than it would be to predict cancerous as non cancerous.
 
 The application has been set up to detect if a test classification is correct by checking for a string in file name to compare against the prediction. In this applications case, it will check negative predictions to see if the string **class0** exists in the file name, and for positive predictions it will check for **class1**, this felps to determine whether they are false negatives or false positives.
 
-![Testing The Universal Windows Application](images/output.jpg)
+![Testing The Universal Windows Application](images/Output-12-Images.jpg)
 
-The logs of the output can be viewed in the output area of Visual Studio. Here it will display the info of each image processed, the prediction and whether it is false positive/false negative or correct/incorrect. What I hoped not see, but expected to see, was false negatives as I had chosen a testing dataset that I believed would possibly trick the classification model. 
+The logs can be viewed in the output can be viewed in the output area of Visual Studio. Here it will display the info of each image processed, the prediction and whether it is false positive/false negative or correct/incorrect, or whether the classifier is unsure due to a low confidence. What I hoped not see, but expected to see, was false negatives as I had chosen a testing dataset that I believed would possibly trick the classification model. 
 
 The console logs of my testing below show that the IDC Classifier identified 4 of the positive examples as negative, although the confidence was low for 3 of these predictions between 0.726 & 0.807.  
 
 ```
-Processing of images for Invasive Ductal Carcinoma initiating
-
 8975_idx5_x301_y801_class0.png
-{"ResponseMessage": "IDC Not Detected With Confidence 1.0", "Confidence": "1.0", "Results": 0, "Response": "OK"}
+{"Confidence": "1.0", "ResponseMessage": "IDC Not Detected With Confidence 1.0", "Response": "OK", "Results": 0}
 CORRECT: IDC correctly not detected in image 1 8975_idx5_x301_y801_class0.png with 1 confidence.
 Processed image 1
-
-8975_idx5_x351_y1051_class0.png
-{"ResponseMessage": "IDC Not Detected With Confidence 0.968", "Confidence": "0.968", "Results": 0, "Response": "OK"}
-CORRECT: IDC correctly not detected in image 2 8975_idx5_x351_y1051_class0.png with 0.968 confidence.
-Processed image 2
-
-8975_idx5_x1001_y1351_class1.png
-{"ResponseMessage": "IDC Detected With Confidence 0.967", "Confidence": "0.967", "Results": 1, "Response": "OK"}
-CORRECT: IDC correctly detected in image 3 8975_idx5_x1001_y1351_class1.png with 0.967 confidence.
-Processed image 3
-
+ 
 8975_idx5_x1001_y1451_class1.png
-{"ResponseMessage": "IDC Not Detected With Confidence 0.9526", "Confidence": "0.9526", "Results": 0, "Response": "OK"}
+{"Confidence": "0.9526", "ResponseMessage": "IDC Not Detected With Confidence 0.9526", "Response": "OK", "Results": 0}
 FALSE NEGATIVE: IDC incorrectly not detected in image 4 8975_idx5_x1001_y1451_class1.png with 0.9526 confidence.
 Processed image 4
+ 
+8975_idx5_x1051_y1251_class1.png
+{"Confidence": "0.807", "ResponseMessage": "IDC Not Detected With Confidence 0.807", "Response": "OK", "Results": 0}
+UNSURE: IDC detected in image 5 8975_idx5_x1051_y1251_class1.png with 0.807 confidence.
+Processed image 5
 
 ------------------------------------------------
 
-8975_idx5_x3501_y1751_class0.png
-{"ResponseMessage": "IDC Not Detected With Confidence 0.942", "Confidence": "0.942", "Results": 0, "Response": "OK"}
-CORRECT: IDC correctly not detected in image 10 8975_idx5_x3501_y1751_class0.png with 0.942 confidence.
-Processed image 10
-
 8975_idx5_x3501_y1801_class0.png
-{"ResponseMessage": "IDC Not Detected With Confidence 0.984", "Confidence": "0.984", "Results": 0, "Response": "OK"}
+{"Confidence": "0.984", "ResponseMessage": "IDC Not Detected With Confidence 0.984", "Response": "OK", "Results": 0}
 CORRECT: IDC correctly not detected in image 11 8975_idx5_x3501_y1801_class0.png with 0.984 confidence.
 Processed image 11
-
+ 
 8975_idx5_x3501_y1851_class0.png
-{"ResponseMessage": "IDC Not Detected With Confidence 0.99", "Confidence": "0.99", "Results": 0, "Response": "OK"}
+{"Confidence": "0.99", "ResponseMessage": "IDC Not Detected With Confidence 0.99", "Response": "OK", "Results": 0}
 CORRECT: IDC correctly not detected in image 12 8975_idx5_x3501_y1851_class0.png with 0.99 confidence.
 Processed image 12
-
-2 true positives, 0 false positives, 3 false negatives, 6 true negatives, 3 incorrect examples classified, 0.33 accuracy, 1 precision, 0.4 recall, 0.57 fscore
-
-- 2 true positives, 0 false positives, 3 false negatives, 6 true negatives
-- 3 incorrect examples classified
-- 0.33 accuracy
+ 
+2 true positives, 0 false positives, 1 false negatives, 3 unsure, 6 true negatives, 1 incorrect examples classified, 0.44 accuracy, 1 precision, 0.67 recall, 0.8 fscore
+ 
+- 2 true positives, 0 false positives, 1 false negatives, 6 true negatives
+- 3 unsure
+- 1 incorrect examples classified
+- 0.44 accuracy
 - 1 precision
-- 0.4 recall
-- 0.57 fscore
+- 0.67 recall
+- 0.8 fscore
+```
+
+The application will classify the image as unsure if it is a positive or negative classification but has a confidence lower than the **threshold** set in **Classes/GlobalData.cs**.  
+
+## False Negatives
+
+```
+8975_idx5_x1001_y1451_class1.png
+{"Confidence": "0.9526", "ResponseMessage": "IDC Not Detected With Confidence 0.9526", "Response": "OK", "Results": 0}
+FALSE NEGATIVE: IDC incorrectly not detected in image 4 8975_idx5_x1001_y1451_class1.png with 0.9526 confidence.
+Processed image 4
+```
+
+## Unsure
+
+By detecting whether the classifier is **unsure** or not, we can remove some data that can be further investigated. In this example, if it is a **negative** or **positive** classification, but the confidence is lower than the threshold, it will remove them from calculations and the **unsure** classifications are identified for further investigation. This allowed the application to catch three of the **false negatives** and mark them as **unsure**. 
+
+In a real world example the use of a threshold would make the application more safe. By catching three of the false negatives, we have helped the classifier to separate the **unsure** data.  
+
+The application is able to understand that it is not very confident on some of the images it classified. This is good because the incorrectly classified images were **false negatives**, this means that if we had not caught these, three of the classifications would of shown no cancer when there actually was cancer. 
+
+The application allows a doctor for example, to manually check images that the classifier has classified but is unsure about. 
+
+Below are the **unsure** classifications made by the application using the **Data\\1** **dataFolder** setting in **Classes/GlobalData.cs**:
+ 
+```
+8975_idx5_x1051_y1251_class1.png
+{"Confidence": "0.807", "ResponseMessage": "IDC Not Detected With Confidence 0.807", "Response": "OK", "Results": 0}
+UNSURE: IDC detected in image 5 8975_idx5_x1051_y1251_class1.png with 0.807 confidence.
+Processed image 5
+
+8975_idx5_x1251_y1251_class1.png
+{"Confidence": "0.851", "ResponseMessage": "IDC Not Detected With Confidence 0.851", "Response": "OK", "Results": 0}
+UNSURE: IDC detected in image 7 8975_idx5_x1251_y1251_class1.png with 0.851 confidence.
+Processed image 7
+ 
+8975_idx5_x1251_y1901_class1.png
+{"Confidence": "0.726", "ResponseMessage": "IDC Not Detected With Confidence 0.726", "Response": "OK", "Results": 0}
+UNSURE: IDC detected in image 8 8975_idx5_x1251_y1901_class1.png with 0.726 confidence.
+Processed image 8
 ```
 
 ![Testing The Universal Windows Application](images/Opposing-Classes.jpg)
 
 You can see the images that were incorrectly classified along with images from opposing classes that I believed may be able to trick the IDC Classifer in the image above. I was able to find similar looking images from the negative class that shows the classifier may of confused two similar images from two seperate classes.
 
-![Testing The Universal Windows Application](../IDC-Classifier/Inception/images/output.jpg)
+![Testing The Universal Windows Application](../IDC-Classifier/Inception/images/Output-12-Images.jpg)
 
 This was also tested using the [IDC Classifier Test Program](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/blob/master/Intel-AI-DevJam-IDC/IDC-Classifier/Classifier.py "IDC Classifier Test Program") with the same outcome. It seems that similar to facial recognition, Inception V3 gets confused on similar images, this can be confirmed or not by testing larger datasets.
 
@@ -151,6 +180,7 @@ This was also tested using the [IDC Classifier Test Program](https://github.com/
 
 - Test on a larger dataset
 - Train more similar examples of the misidentified images
+- Increase the size of the images from the dataset to 200px x 200px
 - Use a different model
 
 ## Testing On A Larger DataSet
@@ -180,6 +210,37 @@ class GlobalData
 ```
 
 This will start the application using the larger dataset the next time you run the application. The process is the same as when we tested the smaller dataset. Click on the **Classify All Images** button and the program will start to process the images.
+
+## Results
+
+Below you can see the end of the console output from testing using folder **Data\\2** with 50 IDC positive and 50 IDC negative images.
+
+```
+8975_idx5_x3501_y1801_class0.png
+{"ResponseMessage": "IDC Not Detected With Confidence 0.984", "Confidence": "0.984", "Results": 0, "Response": "OK"}
+CORRECT: IDC correctly not detected in image 98 8975_idx5_x3501_y1801_class0.png with 0.984 confidence.
+Processed image 98
+
+8975_idx5_x3501_y1851_class0.png
+{"ResponseMessage": "IDC Not Detected With Confidence 0.99", "Confidence": "0.99", "Results": 0, "Response": "OK"}
+CORRECT: IDC correctly not detected in image 99 8975_idx5_x3501_y1851_class0.png with 0.99 confidence.
+Processed image 99
+
+8975_idx5_x3601_y1701_class0.png
+{"ResponseMessage": "IDC Not Detected With Confidence 1.0", "Confidence": "1.0", "Results": 0, "Response": "OK"}
+CORRECT: IDC correctly not detected in image 100 8975_idx5_x3601_y1701_class0.png with 1 confidence.
+Processed image 100
+
+35 true positives, 0 false positives, 11 false negatives, 4 unsure, 50 true negatives, 11 incorrect examples classified, 0.02 accuracy, 1 precision, 0.76 recall, 0.86 fscore
+
+- 35 true positives, 0 false positives, 11 false negatives, 50 true negatives
+- 4 unsure
+- 11 incorrect examples classified
+- 0.02 accuracy
+- 1 precision
+- 0.76 recall
+- 0.86 fscore
+```
 
 ## Get Involved 
 This project is open sourced under the MIT license. All contributions are welcome, you can choose from any of the features list below or submit your own features for review via a pull request. 
