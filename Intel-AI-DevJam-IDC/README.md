@@ -1,6 +1,6 @@
 # Intel AI DevJam Demo
 
-![Intel® Movidius](IDC-Classifier/images/IDC-Classification.jpg)
+![Intel® Movidius](IDC-Classifier/Inception/images/IDC-Classification.jpg)
 
 ## Abstract
 
@@ -24,7 +24,7 @@ The goal of this project is to intentionally try to trick the model by using ver
 
 The **Intel AI DevJam Demo** uses a **Windows application** to communicate with a **facial recognition classifier** and a classifier trained to detect **Invasive Ductal Carcinoma (Breast cancer)** in **histology images**. The project combines the  [Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT](https://github.com/iotJumpway/IoT-JumpWay-Intel-Examples/tree/master/Intel-Movidius/IDC-Classification "Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT") and [TASS Movidius Facenet Classifier](https://github.com/iotJumpway/IoT-JumpWay-Intel-Examples/tree/master/Intel-Movidius/TASS/Facenet "TASS Movidius Facenet Classifier") projects.
 
-**Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT** combines **Computer Vision** and the **Internet of Things** to provide a way to train a neural network with labelled breast cancer histology images to detect **Invasive Ductal Carcinoma (IDC)** in unseen/unlabelled images.
+**Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT** combines **Computer Vision** and the **Internet of Things** to provide a way to train a neural network with labelled breast cancer histology images to detect **Invasive Ductal Carcinoma (IDC)** in unseen/unlabelled images. There are two models available for the IDC classification, one using a custom trained **Inception V3** model, and one using Cafe.
 
 The **TASS Movidius Facenet Classifier** uses **Siamese Neural Networks** and **Triplet Loss** to classify known and unknown faces.
 
@@ -42,17 +42,17 @@ A **Universal Windows Application** allows training and querying the **IDC and f
 
 ## Intel® Movidius & UP2
 
-![Intel® Movidius](IDC-Classifier/images/Movidius.jpg)
+![Intel® Movidius](IDC-Classifier/Inception/images/Movidius.jpg)
 
 For classification the project uses the **Intel® Movidius** and a custom trained **Facenet** to carry out **facial classification**, and a custom trained **Inception V3 model** for detecting **Invasive Ductal Carcinoma (IDC)** homed on an **UP2**. 
 
-![Intel® UP2](IDC-Classifier/images/UP2.jpg)
+![Intel® UP2](IDC-Classifier/Inception/images/UP2.jpg)
 
 The **TASS Movidius Facenet Classifier** uses **Siamese Neural Networks** and **Triplet Loss** to classify known and unknown faces.
 
 ## Raspberry Pi 3b
 
-![Raspberry Pi 3b](IDC-Classifier/images/RPI3.jpg)
+![Raspberry Pi 3b](IDC-Classifier/Inception/images/RPI3.jpg)
 
 An IoT connected alarm awaits messages for the results of the **facial** and **IDC** classification. In the event an unauthorized user is detected or IDC is detected an alarm (buzzer) is triggered and a red LED lights up, if both classifications are ok a blue LED lights up.
 
