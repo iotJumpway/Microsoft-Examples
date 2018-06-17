@@ -1,7 +1,7 @@
 # Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT
 ## Intel AI DevJam Demo GUI
 
-![Intel AI DevJam Demo GUI](../IDC-Classifier/images/IDC-Classification.jpg)
+![Intel AI DevJam Demo GUI](../IDC-Classifier/Inception/images/IDC-Classification.jpg)
 
 ## Abstract
 
@@ -122,7 +122,7 @@ CORRECT: IDC correctly not detected in image 12 8975_idx5_x3501_y1851_class0.png
 
 You can see the images that were incorrectly classified along with images from opposing classes that I believed may be able to trick the IDC Classifer in the image above. I was able to find similar looking images from the negative class that shows the classifier may of confused two similar images from two seperate classes.
 
-![Testing The Universal Windows Application](../IDC-Classifier/images/output.jpg)
+![Testing The Universal Windows Application](../IDC-Classifier/Inception/images/output.jpg)
 
 This was also tested using the [IDC Classifier Test Program](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/blob/master/Intel-AI-DevJam-IDC/IDC-Classifier/Classifier.py "IDC Classifier Test Program") with the same outcome. It seems that similar to facial recognition, Inception V3 gets confused on similar images, this can be confirmed or not by testing larger datasets.
 
