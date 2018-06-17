@@ -83,9 +83,9 @@ The application has been set up to detect if a test classification is correct by
 
 ![Testing The Universal Windows Application](images/Output-12-Images.jpg)
 
-The logs can be viewed in the output can be viewed in the output area of Visual Studio. Here it will display the info of each image processed, the prediction and whether it is false positive/false negative or correct/incorrect, or whether the classifier is unsure due to a low confidence. What I hoped not see, but expected to see, was false negatives as I had chosen a testing dataset that I believed would possibly trick the classification model. 
+The logs can be viewed in the outputs area of Visual Studio. Here it will display the info of each image processed, the prediction and whether it is false positive/false negative or correct/incorrect, or whether the classifier is unsure due to a low confidence. What I hoped not see, but expected to see, was false negatives as I had chosen a testing dataset that I believed would possibly trick the classification model. 
 
-The console logs of my testing below show that the IDC Classifier identified 4 of the positive examples as negative, although the confidence was low for 3 of these predictions between 0.726 & 0.807.  
+The console logs and info from my testing below shows that the IDC Classifier identified 1 of the positive examples as negative, and the application caught 3 false positives as unsure and requires more incpection due to low confidences. 
 
 ```
 8975_idx5_x301_y801_class0.png
@@ -170,7 +170,7 @@ Processed image 8
 
 You can see the images that were incorrectly classified along with images from opposing classes that I believed may be able to trick the IDC Classifer in the image above. I was able to find similar looking images from the negative class that shows the classifier may of confused two similar images from two seperate classes.
 
-![Testing The Universal Windows Application](../IDC-Classifier/Inception/images/Output-12-Images.jpg)
+![Testing The Universal Windows Application](../IDC-Classifier/Inception/images/output.jpg)
 
 This was also tested using the [IDC Classifier Test Program](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/blob/master/Intel-AI-DevJam-IDC/IDC-Classifier/Classifier.py "IDC Classifier Test Program") with the same outcome. It seems that similar to facial recognition, Inception V3 gets confused on similar images, this can be confirmed or not by testing larger datasets.
 
