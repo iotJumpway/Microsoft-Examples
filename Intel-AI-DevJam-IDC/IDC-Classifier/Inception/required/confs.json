@@ -1,25 +1,25 @@
 {
     "IoTJumpWay": {
-        "Location": 80,
-        "Zone": 79,
-        "Device": 93,
-        "DeviceName" : "TASS-Facenet",
+        "Location": 0,
+        "Zone": 0,
+        "Device": 0,
+        "DeviceName" : "",
         "App": 0
     },
     "Actuators": {},
     "Cameras": [
         {
-            "ID": 186,
+            "ID": 0,
             "URL": 0,
-            "Name": "TASS Facenet Classifier",
-            "Stream": "192.168.1.50",
+            "Name": "",
+            "Stream": "",
             "StreamPort": 8080
         }
     ],
     "Sensors": {},
 	"IoTJumpWayMQTT": {
-        "MQTTUsername": "QOE19gS2UcMd",
-        "MQTTPassword": "aiV3!q4zdqy(gDldwkzj"
+        "MQTTUsername": "",
+        "MQTTPassword": ""
     },
 	"ClassifierSettings":{
 		"dataset_dir":"model/train/",
@@ -41,11 +41,11 @@
 		"batch_size":10,
 		"test_batch_size":36,
 		"initial_learning_rate":0.0001,
-		"learning_rate_decay_factor":0.96,
+		"learning_rate_decay_factor":0.80,
 		"num_epochs_before_decay":10,
 		"NetworkPath":"",
-		"InceptionImagePath":"model/test/",
-		"InceptionThreshold": 0.91,
+		"InceptionImagePath":"data/idc/1/",
+		"InceptionThreshold": 0.80,
 		"InceptionGraph":"model/idc.graph",
 		"InceptionGraphDevCloud":"model/idcdc.graph",
         "Graph":"model/tass.graph",
