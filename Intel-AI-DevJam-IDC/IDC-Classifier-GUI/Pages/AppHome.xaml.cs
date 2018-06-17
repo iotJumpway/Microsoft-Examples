@@ -125,7 +125,7 @@ namespace IDC_Classifier_GUI
                         }
                         else
                         {
-                            Debug.WriteLine("UNSURE: IDC detected in image " + (counter + 1) + " " + file.Name + " with " + confidence + " confidence.");
+                            Debug.WriteLine("UNSURE: IDC not detected in image " + (counter + 1) + " " + file.Name + " with " + confidence + " confidence.");
                             unsure = unsure + 1;
                         }
                         
