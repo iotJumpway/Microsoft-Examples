@@ -149,6 +149,8 @@ This was also tested using the [IDC Classifier Test Program](https://github.com/
 
 ## Testing On A Larger DataSet
 
+![Testing The Universal Windows Application](images/large-dataset.jpg)
+
 The second folder located in the **Data** folder can be used to test the classifier on 100 images, 50 negative and 50 positive. These images have been randomly selected and may or may not confuse similar images from seperate classes. 
 
 ## Server Settings
@@ -172,8 +174,6 @@ class GlobalData
 ```
 
 This will start the application using the larger dataset the next time you run the application. The process is the same as when we tested the smaller dataset. Click on the **Classify All Images** button and the program will start to process the images.
-
-![Testing The Universal Windows Application](images/large-dataset.jpg)
 
 ## Get Involved 
 This project is open sourced under the MIT license. All contributions are welcome, you can choose from any of the features list below or submit your own features for review via a pull request. 
