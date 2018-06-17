@@ -180,7 +180,7 @@ This was also tested using the [IDC Classifier Test Program](https://github.com/
 
 - Test on a larger dataset
 - Train more similar examples of the misidentified images
-- Increase the size of the images from the dataset to 200px x 200px
+- Increase the size of the training images from the dataset to 200px x 200px
 - Use a different model
 
 ## Testing On A Larger DataSet
@@ -250,6 +250,11 @@ The above shows that on a dataset of 100 images there were 7 incorrect classific
 
 ![Testing The Universal Windows Application](images/Opposing-Classes-100.jpg)
 
+It appears that all of the false negatives have at least two things in common.
+
+- They all have distinctive areas of white
+- They all have at least one very similar training example in the opposite class
+
 ```
 8975_idx5_x1001_y1451_class1.png
 {"Confidence": "0.9526", "ResponseMessage": "IDC Not Detected With Confidence 0.9526", "Response": "OK", "Results": 0}
@@ -293,6 +298,11 @@ Processed image 65
 ![Testing The Universal Windows Application](images/Unsure.jpg)
 
 Our **unsure** classifications allow us to catch classifications that the model did not have high **confidence** on, this could help save lives in the case of captching **false negatives**.
+
+It appears that all of the **unsure** classifications have at least two things in common.
+
+- They mostly all have distinctive areas of white
+- The small amount of purple is not detected in images with pink backgrounds
 
 ``` 
 8975_idx5_x1001_y1301_class1.png
@@ -376,7 +386,15 @@ UNSURE: IDC not detected in image 66 8975_idx5_x1251_y1251_class1.png with 0.851
 Processed image 66
 ```
 
+## Things To Try
 
+We can try a couple of things to help enhance the applications capabilities. 
+
+- Pre detect and remove images with large amounts of white for manual examination
+- Check negative classifications to see if they do actually include purple
+- Train more similar examples of the misidentified images
+- Increase the size of the training images from the dataset to 200px x 200px
+- Use a different model
 
 ## Get Involved 
 This project is open sourced under the MIT license. All contributions are welcome, you can choose from any of the features list below or submit your own features for review via a pull request. 
