@@ -189,9 +189,9 @@ The second folder located in the **Data** folder can be used to test the classif
 
 ![Testing The Universal Windows Application](images/large-dataset.jpg) 
 
-## Server Settings
+## Data Folder
 
-You need the application to use the larger IDC test data. You can achieve this by editing the **Classes/GlobalData.cs** file by uncommenting the **Data\\2** folder and commenting out the **Data\\1** folder.
+You need the application to use the larger IDC testing data folder. You can achieve this by editing the **Classes/GlobalData.cs** file and uncommenting the **Data\\2** folder and commenting out the **Data\\1** folder. Then change **expectedCount** to 50.
 
 ```
 class GlobalData
@@ -211,35 +211,164 @@ class GlobalData
 
 This will start the application using the larger dataset the next time you run the application. The process is the same as when we tested the smaller dataset. Click on the **Classify All Images** button and the program will start to process the images.
 
-## Results
+## Inception V3 Results
 
 Below you can see the end of the console output from testing using folder **Data\\2** with 50 IDC positive and 50 IDC negative images.
 
+![Testing The Universal Windows Application](images/Output-100-Images.jpg) 
+
 ```
 8975_idx5_x3501_y1801_class0.png
-{"ResponseMessage": "IDC Not Detected With Confidence 0.984", "Confidence": "0.984", "Results": 0, "Response": "OK"}
+{"Confidence": "0.984", "ResponseMessage": "IDC Not Detected With Confidence 0.984", "Response": "OK", "Results": 0}
 CORRECT: IDC correctly not detected in image 98 8975_idx5_x3501_y1801_class0.png with 0.984 confidence.
 Processed image 98
-
+ 
 8975_idx5_x3501_y1851_class0.png
-{"ResponseMessage": "IDC Not Detected With Confidence 0.99", "Confidence": "0.99", "Results": 0, "Response": "OK"}
+{"Confidence": "0.99", "ResponseMessage": "IDC Not Detected With Confidence 0.99", "Response": "OK", "Results": 0}
 CORRECT: IDC correctly not detected in image 99 8975_idx5_x3501_y1851_class0.png with 0.99 confidence.
 Processed image 99
-
+ 
 8975_idx5_x3601_y1701_class0.png
-{"ResponseMessage": "IDC Not Detected With Confidence 1.0", "Confidence": "1.0", "Results": 0, "Response": "OK"}
+{"Confidence": "1.0", "ResponseMessage": "IDC Not Detected With Confidence 1.0", "Response": "OK", "Results": 0}
 CORRECT: IDC correctly not detected in image 100 8975_idx5_x3601_y1701_class0.png with 1 confidence.
 Processed image 100
-
-35 true positives, 0 false positives, 11 false negatives, 4 unsure, 50 true negatives, 11 incorrect examples classified, 0.02 accuracy, 1 precision, 0.76 recall, 0.86 fscore
-
-- 35 true positives, 0 false positives, 11 false negatives, 50 true negatives
-- 4 unsure
-- 11 incorrect examples classified
-- 0.02 accuracy
+ 
+27 true positives, 0 false positives, 7 false negatives, 16 unsure, 50 true negatives, 7 incorrect examples classified, 0.03 accuracy, 1 precision, 0.79 recall, 0.89 fscore
+ 
+- 27 true positives, 0 false positives, 7 false negatives, 50 true negatives
+- 16 unsure
+- 7 incorrect examples classified
+- 0.03 accuracy
 - 1 precision
-- 0.76 recall
-- 0.86 fscore
+- 0.79 recall
+- 0.89 fscore
+```
+
+The above shows that on a dataset of 100 images there were 7 incorrect classifications all of which are **false negatives** with a **confidence of 0.90 or higher**. The application marked 16 images as **unsure** and **correctly** identified 27 of the 50 IDC positive images.
+
+## False Negatives
+
+```
+8975_idx5_x1001_y1451_class1.png
+{"Confidence": "0.9526", "ResponseMessage": "IDC Not Detected With Confidence 0.9526", "Response": "OK", "Results": 0}
+FALSE NEGATIVE: IDC incorrectly not detected in image 20 8975_idx5_x1001_y1451_class1.png with 0.9526 confidence.
+Processed image 20
+
+8975_idx5_x1051_y1451_class1.png
+{"Confidence": "0.904", "ResponseMessage": "IDC Not Detected With Confidence 0.904", "Response": "OK", "Results": 0}
+FALSE NEGATIVE: IDC incorrectly not detected in image 25 8975_idx5_x1051_y1451_class1.png with 0.904 confidence.
+Processed image 25
+ 
+8975_idx5_x1051_y1601_class1.png
+{"Confidence": "0.937", "ResponseMessage": "IDC Not Detected With Confidence 0.937", "Response": "OK", "Results": 0}
+FALSE NEGATIVE: IDC incorrectly not detected in image 26 8975_idx5_x1051_y1601_class1.png with 0.937 confidence.
+Processed image 26
+ 
+8975_idx5_x1051_y1651_class1.png
+{"Confidence": "0.9727", "ResponseMessage": "IDC Not Detected With Confidence 0.9727", "Response": "OK", "Results": 0}
+FALSE NEGATIVE: IDC incorrectly not detected in image 27 8975_idx5_x1051_y1651_class1.png with 0.9727 confidence.
+Processed image 27
+
+8975_idx5_x1151_y1201_class1.png
+{"Confidence": "0.973", "ResponseMessage": "IDC Not Detected With Confidence 0.973", "Response": "OK", "Results": 0}
+FALSE NEGATIVE: IDC incorrectly not detected in image 38 8975_idx5_x1151_y1201_class1.png with 0.973 confidence.
+Processed image 38
+ 
+8975_idx5_x1201_y1201_class1.png
+{"Confidence": "0.958", "ResponseMessage": "IDC Not Detected With Confidence 0.958", "Response": "OK", "Results": 0}
+FALSE NEGATIVE: IDC incorrectly not detected in image 51 8975_idx5_x1201_y1201_class1.png with 0.958 confidence.
+Processed image 51
+
+8975_idx5_x1251_y1201_class1.png
+{"Confidence": "0.979", "ResponseMessage": "IDC Not Detected With Confidence 0.979", "Response": "OK", "Results": 0}
+FALSE NEGATIVE: IDC incorrectly not detected in image 65 8975_idx5_x1251_y1201_class1.png with 0.979 confidence.
+Processed image 65
+
+```
+
+## Unsure
+
+``` 
+8975_idx5_x1001_y1301_class1.png
+{"Confidence": "0.8223", "ResponseMessage": "IDC Detected With Confidence 0.8223", "Response": "OK", "Results": 1}
+UNSURE: IDC detected in image 17 8975_idx5_x1001_y1301_class1.png with 0.8223 confidence.
+Processed image 17
+
+8975_idx5_x1051_y1251_class1.png
+{"Confidence": "0.807", "ResponseMessage": "IDC Not Detected With Confidence 0.807", "Response": "OK", "Results": 0}
+UNSURE: IDC detected in image 21 8975_idx5_x1051_y1251_class1.png with 0.807 confidence.
+Processed image 21
+ 
+8975_idx5_x1051_y1301_class1.png
+{"Confidence": "0.723", "ResponseMessage": "IDC Not Detected With Confidence 0.723", "Response": "OK", "Results": 0}
+UNSURE: IDC detected in image 22 8975_idx5_x1051_y1301_class1.png with 0.723 confidence.
+Processed image 22
+
+8975_idx5_x1051_y1401_class1.png
+{"Confidence": "0.854", "ResponseMessage": "IDC Detected With Confidence 0.854", "Response": "OK", "Results": 1}
+UNSURE: IDC detected in image 24 8975_idx5_x1051_y1401_class1.png with 0.854 confidence.
+Processed image 24
+ 
+8975_idx5_x1101_y1251_class1.png
+{"Confidence": "0.8604", "ResponseMessage": "IDC Detected With Confidence 0.8604", "Response": "OK", "Results": 1}
+UNSURE: IDC detected in image 28 8975_idx5_x1101_y1251_class1.png with 0.8604 confidence.
+Processed image 28
+
+8975_idx5_x1101_y1451_class1.png
+{"Confidence": "0.622", "ResponseMessage": "IDC Not Detected With Confidence 0.622", "Response": "OK", "Results": 0}
+UNSURE: IDC detected in image 32 8975_idx5_x1101_y1451_class1.png with 0.622 confidence.
+Processed image 32
+ 
+8975_idx5_x1101_y1501_class1.png
+{"Confidence": "0.887", "ResponseMessage": "IDC Not Detected With Confidence 0.887", "Response": "OK", "Results": 0}
+UNSURE: IDC detected in image 33 8975_idx5_x1101_y1501_class1.png with 0.887 confidence.
+Processed image 33
+ 
+8975_idx5_x1101_y1551_class1.png
+{"Confidence": "0.84", "ResponseMessage": "IDC Detected With Confidence 0.84", "Response": "OK", "Results": 1}
+UNSURE: IDC detected in image 34 8975_idx5_x1101_y1551_class1.png with 0.84 confidence.
+Processed image 34
+
+8975_idx5_x1101_y1701_class1.png
+{"Confidence": "0.8193", "ResponseMessage": "IDC Detected With Confidence 0.8193", "Response": "OK", "Results": 1}
+UNSURE: IDC detected in image 37 8975_idx5_x1101_y1701_class1.png with 0.8193 confidence.
+Processed image 37
+ 
+8975_idx5_x1151_y1251_class1.png
+{"Confidence": "0.5435", "ResponseMessage": "IDC Not Detected With Confidence 0.5435", "Response": "OK", "Results": 0}
+UNSURE: IDC detected in image 39 8975_idx5_x1151_y1251_class1.png with 0.5435 confidence.
+Processed image 39
+
+8975_idx5_x1151_y1451_class1.png
+{"Confidence": "0.891", "ResponseMessage": "IDC Detected With Confidence 0.891", "Response": "OK", "Results": 1}
+UNSURE: IDC detected in image 43 8975_idx5_x1151_y1451_class1.png with 0.891 confidence.
+Processed image 43
+
+8975_idx5_x1151_y1601_class1.png
+{"Confidence": "0.849", "ResponseMessage": "IDC Detected With Confidence 0.849", "Response": "OK", "Results": 1}
+UNSURE: IDC detected in image 46 8975_idx5_x1151_y1601_class1.png with 0.849 confidence.
+Processed image 46
+
+8975_idx5_x1151_y1801_class1.png
+{"Confidence": "0.7793", "ResponseMessage": "IDC Not Detected With Confidence 0.7793", "Response": "OK", "Results": 0}
+UNSURE: IDC detected in image 50 8975_idx5_x1151_y1801_class1.png with 0.7793 confidence.
+Processed image 50
+ 
+8975_idx5_x1201_y1251_class1.png
+{"Confidence": "0.8906", "ResponseMessage": "IDC Not Detected With Confidence 0.8906", "Response": "OK", "Results": 0}
+UNSURE: IDC detected in image 52 8975_idx5_x1201_y1251_class1.png with 0.8906 confidence.
+Processed image 52
+
+8975_idx5_x1201_y1851_class1.png
+{"Confidence": "0.895", "ResponseMessage": "IDC Detected With Confidence 0.895", "Response": "OK", "Results": 1}
+UNSURE: IDC detected in image 64 8975_idx5_x1201_y1851_class1.png with 0.895 confidence.
+Processed image 64
+ 
+8975_idx5_x1251_y1251_class1.png
+{"Confidence": "0.851", "ResponseMessage": "IDC Not Detected With Confidence 0.851", "Response": "OK", "Results": 0}
+UNSURE: IDC detected in image 66 8975_idx5_x1251_y1251_class1.png with 0.851 confidence.
+Processed image 66
+
 ```
 
 ## Get Involved 
