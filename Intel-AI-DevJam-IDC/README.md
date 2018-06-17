@@ -1,10 +1,10 @@
-# Intel AI DevJam Demo
+# Reducing False Negatives in the IDC Classifier
 
-![Intel® Movidius](IDC-Classifier/Inception/images/IDC-Classification.jpg)
+![Intel® Movidius](images/IDC-Classification.jpg)
 
 ## Abstract
 
-The **Intel AI DevJam Demo** project provides the source codes and tutorials for setting up the project that will be demonstrated at **Intel AI DevJam** at **ICML** (**International Conference on Machine Learning**) in **Sweden**, July 2018.
+The **Intel AI DevJam Demo** project, **Reducing False Negatives in the IDC Classifier**, provides the source codes and tutorials for setting up the project that will be demonstrated at **Intel AI DevJam** at **ICML** (**International Conference on Machine Learning**) in **Sweden**, July 2018.
 
 The **Intel® AI DevJam Demo GUI** uses a **Windows application** to communicate with a **facial recognition classifier** and an option of two classifiers trained to detect **Invasive Ductal Carcinoma (Breast cancer)** in **histology images**.
 
