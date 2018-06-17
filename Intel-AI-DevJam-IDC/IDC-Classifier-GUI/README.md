@@ -9,7 +9,7 @@ The **Intel AI DevJam Demo** project provides the source codes and tutorials for
 
 The **Intel® AI DevJam Demo GUI** uses a **Windows application** to communicate with a **facial recognition classifier** and a classifier trained to detect **Invasive Ductal Carcinoma (Breast cancer)** in **histology images**.
 
-The goal of this project is to intentionally try to trick the model by using very similar, but opposite class, images from a small set of testing data that I believe humans may have difficulty telling apart. A larger set of testing data is provided in the **DataSets** folder of the GUI project to compare how the model works on larger datasets. 
+The goal of this project is to intentionally try to trick the model by using very similar, but opposite class, images from a small set of testing data that I believe humans may have difficulty telling apart. A larger set of testing data is also provided to compare how the model works on larger datasets. 
 
 ## IoT Connectivity
 
@@ -52,9 +52,9 @@ namespace IDC_Classifier_GUI
 
 ## Testing Data
 
-Inside the GUI project folder you will find a folder callled **Data**. Currently this folder has 12 specifically chosen unseen histology images. The images chosen were examples that I believed to be very similar to examples in the opposing class, the purpose of chosing these images was to see how the network reacts with very similar but opposite class images.
+Inside the GUI project folder you will find a folder called **Data** and inside there 2 folders of data **1** & **2**. Currently the 1st folder has 12 specifically chosen **unseen histology images**. The images chosen were examples that I believed to be very similar to examples in the opposite class. The purpose of chosing these images was to see how the network reacts with very similar but opposite class images. You can flip between the two different size datasets, 1 & 2, or point to your own in the **dataFolder** setting in **Classes/GlobalData.cs**
 
-To add your own data you can remove the images in the Data folder and add your own dataset to the folder. Once you have added them to the folder you need to remove any unused images from the directory inside of Visual Studio and then add the images into the project by right clicking on the **Data** folder, clicking add, and then selecting your new dataset and adding them to the project. 
+To add your own data you can remove the images in the **Data** folder and add your own dataset to the folder. Once you have added them to the folder you need to remove any unused images from the directory inside of Visual Studio and then add the new images into the project by right clicking on the **Data** folder, clicking add, and then selecting your new dataset. 
 
 ## Testing The Universal Windows Application
 
@@ -78,9 +78,9 @@ Click on the **Classify All Images** button to begin the classification process.
 
 As mentioned the images were purposely chosen to challenge the network on false negatives and positives. Ideally there would be 0 of either, but the best case scenario with misclassification is false positives, as it would be better to incorrectly predict non cancerous as cancercerous than it would be to predict cancerous as non cancerous.
 
-The application has been set up to detect if a test classification is correct by checking for a string in file name to compare against the prediction. In this applications case, it will check negative predictions to see if the string **class0** exists in the file name, and for positive predictions it will check for **class1**, this felps to determine whether they are false negatives or false positives.
-
 ![Testing The Universal Windows Application](images/output.jpg)
+
+The application has been set up to detect if a test classification is correct by checking for a string in file name to compare against the prediction. In this applications case, it will check negative predictions to see if the string **class0** exists in the file name, and for positive predictions it will check for **class1**, this felps to determine whether they are false negatives or false positives.
 
 The logs of the output can be viewed in the output area of Visual Studio. Here it will display the info of each image processed, the prediction and whether it is false positive/false negative or correct/incorrect. What I hoped not see, but expected to see, was false negatives as I had chosen a testing dataset that I believed would possibly trick the classification model. 
 
@@ -88,6 +88,7 @@ The console logs of my testing below show that the IDC Classifier identified 4 o
 
 ```
 Processing of images for Invasive Ductal Carcinoma initiating
+
 8975_idx5_x301_y801_class0.png
 {"Confidence": "1.0", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 1.0"}
 Processed image 1
@@ -99,34 +100,11 @@ CORRECT: IDC correctly not detected in image 2 8975_idx5_x351_y1051_class0.png w
 8975_idx5_x1001_y1351_class1.png
 {"Confidence": "0.967", "Response": "OK", "Results": 1, "ResponseMessage": "IDC Detected With Confidence 0.967"}
 Processed image 3
-CORRECT: IDC correctly detected in image 3 8975_idx5_x1001_y1351_class1.png with 0.967 confidence.
-8975_idx5_x1001_y1451_class1.png
-{"Confidence": "0.9526", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 0.9526"}
-Processed image 4
+--------
 FALSE NEGATIVE: IDC incorrectly not detected in image 4 8975_idx5_x1001_y1451_class1.png with 0.9526 confidence.
 8975_idx5_x1051_y1251_class1.png
 {"Confidence": "0.807", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 0.807"}
 Processed image 5
-FALSE NEGATIVE: IDC incorrectly not detected in image 5 8975_idx5_x1051_y1251_class1.png with 0.807 confidence.
-8975_idx5_x1201_y1801_class1.png
-{"Confidence": "0.9644", "Response": "OK", "Results": 1, "ResponseMessage": "IDC Detected With Confidence 0.9644"}
-Processed image 6
-CORRECT: IDC correctly detected in image 6 8975_idx5_x1201_y1801_class1.png with 0.9644 confidence.
-8975_idx5_x1251_y1251_class1.png
-{"Confidence": "0.851", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 0.851"}
-Processed image 7
-FALSE NEGATIVE: IDC incorrectly not detected in image 7 8975_idx5_x1251_y1251_class1.png with 0.851 confidence.
-8975_idx5_x1251_y1901_class1.png
-{"Confidence": "0.726", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 0.726"}
-Processed image 8
-FALSE NEGATIVE: IDC incorrectly not detected in image 8 8975_idx5_x1251_y1901_class1.png with 0.726 confidence.
-8975_idx5_x3501_y1701_class0.png
-{"Confidence": "0.9194", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 0.9194"}
-Processed image 9
-CORRECT: IDC correctly not detected in image 9 8975_idx5_x3501_y1701_class0.png with 0.9194 confidence.
-8975_idx5_x3501_y1751_class0.png
-{"Confidence": "0.942", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 0.942"}
-Processed image 10
 CORRECT: IDC correctly not detected in image 10 8975_idx5_x3501_y1751_class0.png with 0.942 confidence.
 8975_idx5_x3501_y1801_class0.png
 {"Confidence": "0.984", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 0.984"}
@@ -135,13 +113,25 @@ CORRECT: IDC correctly not detected in image 11 8975_idx5_x3501_y1801_class0.png
 8975_idx5_x3501_y1851_class0.png
 {"Confidence": "0.99", "Response": "OK", "Results": 0, "ResponseMessage": "IDC Not Detected With Confidence 0.99"}
 Processed image 12
+
 CORRECT: IDC correctly not detected in image 12 8975_idx5_x3501_y1851_class0.png with 0.99 confidence.
 2 positive examples detected out of 6 positive & 6 negative examples. 4 incorrect, 0 false positives and 4 false negatives.
 ```
 
 ![Testing The Universal Windows Application](images/Opposing-Classes.jpg)
 
-You can see the images that were incorrectly classified along with images from opposing classes that I believed may be able to trick the IDC Classifer in the image above. 
+You can see the images that were incorrectly classified along with images from opposing classes that I believed may be able to trick the IDC Classifer in the image above. I was able to find similar looking images from the negative class that shows the classifier may of confused two similar images from two seperate classes.
+
+![Testing The Universal Windows Application](../IDC-Classifier/images/output.jpg)
+
+This was also tested using the [IDC Classifier Test Program](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/blob/master/Intel-AI-DevJam-IDC/IDC-Classifier/Classifier.py "IDC Classifier Test Program") with the same outcome. It seems that similar to facial recognition, Inception V3 gets confused on similar images, this can be confirmed or not by testing larger datasets.
+
+## Testing On A Larger DataSet
+
+The second folder located in the **Data** folder can be used to test the classifier on 100 images, 50 negative and 50 positive. These images have been randomly selected and may or may not confuse similar images from seperate classes. 
+
+
+
 
 ## Get Involved 
 This project is open sourced under the MIT license. All contributions are welcome, you can choose from any of the features list below or submit your own features for review via a pull request. 

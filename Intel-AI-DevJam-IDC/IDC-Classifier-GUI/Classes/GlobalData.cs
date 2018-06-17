@@ -13,7 +13,10 @@ namespace IDC_Classifier_GUI
         public int port = 8080;
         public string endpoint = "/api/TASS/infer";
         public string endpointIDC = "/api/IDC/infer";
+        public string dataFolder = "Data\\1";
+        //public string dataFolder = "Data\\2";
 
+        public double threshold = 0.80;
         public int expectedCount = 6;
 
 

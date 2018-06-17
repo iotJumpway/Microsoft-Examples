@@ -39,7 +39,8 @@ namespace IDC_Classifier_GUI
         {
             Debug.WriteLine("-- GETTING FILES");
             StorageFolder appInstalledFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
-            StorageFolder dataFolder = await appInstalledFolder.GetFolderAsync("Data");
+
+            StorageFolder dataFolder = await appInstalledFolder.GetFolderAsync(GlobalData.dataFolder);
             IReadOnlyList<StorageFile> fileList = await dataFolder.GetFilesAsync();
 
             var result = new ObservableCollection<BitmapImage>();
@@ -48,6 +49,8 @@ namespace IDC_Classifier_GUI
             int counter = 0;
             int identified = 0;
             int incorrect = 0;
+            int unsure = 0;
+            int tns = 0;
             int fps = 0;
             int fns = 0;
             foreach (StorageFile file in fileList)
@@ -67,48 +70,82 @@ namespace IDC_Classifier_GUI
 
                 JToken token = JObject.Parse(stringReadResult);
                 received = (int)token.SelectToken("Results");
+                double confidence = (double)token.SelectToken("Confidence");
                 string Response = (string)token.SelectToken("ResponseMessage");
 
                 if (received != 0)
                 {
                     if (file.Name.Contains("class1"))
                     {
-                        Debug.WriteLine("CORRECT: IDC correctly detected in image " + (counter + 1) + " " + file.Name);
-                        Speech.Speak("Processed image " + (counter + 1));
-                        identified = identified + 1;
-
+                        if (confidence >= GlobalData.threshold)
+                        {
+                            Debug.WriteLine("CORRECT: IDC correctly detected in image " + (counter + 1) + " " + file.Name + " with " + confidence + " confidence.");
+                            identified = identified + 1;
+                        }
+                        else
+                        {
+                            Debug.WriteLine("UNSURE: IDC detected in image " + (counter + 1) + " " + file.Name + " with " + confidence + " confidence.");
+                            unsure = unsure + 1;
+                        }
                     }
                     else
                     {
-                        Debug.WriteLine("FALSE POSITIVE: IDC incorrectly detected in image " + (counter + 1) + " " + file.Name);
-                        Speech.Speak("Processed image " + (counter + 1));
-                        fps = fps + 1;
-                        incorrect = incorrect + 1;
+                        if (confidence >= GlobalData.threshold)
+                        { 
+                            Debug.WriteLine("FALSE POSITIVE: IDC incorrectly detected in image " + (counter + 1) + " " + file.Name + " with " + confidence + " confidence.");
+                            fps = fps + 1;
+                            incorrect = incorrect + 1;
+                        }
+                        else
+                        {
+                            Debug.WriteLine("UNSURE: IDC detected in image " + (counter + 1) + " " + file.Name + " with " + confidence + " confidence.");
+                            unsure = unsure + 1;
+                        }
                     }
+                    Speech.Speak("Processed image " + (counter + 1));
 
                 }
                 else
                 {
                     if (file.Name.Contains("class0"))
                     {
-                        Debug.WriteLine("CORRECT: IDC correctly not detected in image " + (counter + 1) + " " + file.Name);
-                        Speech.Speak("Processed image " + (counter + 1));
-                        identified = identified + 1;
+                        Debug.WriteLine("CORRECT: IDC correctly not detected in image " + (counter + 1) + " " + file.Name + " with " + confidence + " confidence.");
+                        tns = tns + 1;
 
                     }
                     else
                     {
-                        Debug.WriteLine("FALSE NEGATIVE: IDC incorrectly not detected in image " + (counter + 1) + " " + file.Name);
-                        Speech.Speak("Processed image " + (counter + 1));
-                        fns = fns + 1;
-                        incorrect = incorrect + 1;
+                        if (confidence >= GlobalData.threshold)
+                        {
+                            Debug.WriteLine("FALSE NEGATIVE: IDC incorrectly not detected in image " + (counter + 1) + " " + file.Name + " with " + confidence + " confidence.");
+                            fns = fns + 1;
+                            incorrect = incorrect + 1;
+                        }
+                        else
+                        {
+                            Debug.WriteLine("UNSURE: IDC detected in image " + (counter + 1) + " " + file.Name + " with " + confidence + " confidence.");
+                            unsure = unsure + 1;
+                        }
+                        
                     }
+                    Speech.Speak("Processed image " + (counter + 1));
                 }
                 counter++;
                 if (counter == (GlobalData.expectedCount*2))
                 {
-                    Speech.Speak(identified + " positive examples detected out of " + GlobalData.expectedCount + " positive & " + GlobalData.expectedCount + " negative examples. " + incorrect + " incorrect, " + fps + " false positives and " + fns + " false negatives.");
-                    Debug.WriteLine(identified + " positive examples detected  out of " + GlobalData.expectedCount + " positive & " + GlobalData.expectedCount + " negative examples. " + incorrect + " incorrect, " + fps + " false positives and " + fns+" false negatives.");
+                    double accuracy = (((double)tns + (double)identified) / ((double)identified + (double)fps)) / (double)counter;
+                    double precision = (double)identified / ((double)identified + (double)fps);
+                    double recall = (double)identified / ((double)identified + (double)fns);
+                    double fscore = 2 * (double)precision * (double)recall / ((double)precision + (double)recall);
+
+                    Speech.Speak(identified + " true positives, " + fps + " false positives, " + fns + " false negatives, " + tns + " true negatives, " + incorrect + " incorrect examples classified, " + accuracy + " accuracy, " + precision + " precision, " + recall + " recall, " + fscore + " fscore");
+                
+                    Debug.WriteLine("- " + identified  + " true positives, " + fps + " false positives, " + fns + " false negatives, " + tns + " true negatives");
+                    Debug.WriteLine("- " + incorrect + " incorrect examples classified");
+                    Debug.WriteLine("- " + accuracy + " accuracy");
+                    Debug.WriteLine("- " + precision + " precision");
+                    Debug.WriteLine("- " + recall + " recall");
+                    Debug.WriteLine("- " + fscore + " fscore");
                 }
                 System.Threading.Thread.Sleep(1000);
             }
@@ -117,7 +154,7 @@ namespace IDC_Classifier_GUI
         {
             Debug.WriteLine("-- GETTING FILES");
             StorageFolder appInstalledFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
-            StorageFolder dataFolder = await appInstalledFolder.GetFolderAsync("Data");
+            StorageFolder dataFolder = await appInstalledFolder.GetFolderAsync(GlobalData.dataFolder);
             IReadOnlyList<StorageFile> fileList = await dataFolder.GetFilesAsync();
 
             this.ImageHolder.Opacity = 0;
