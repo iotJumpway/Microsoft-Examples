@@ -1,15 +1,17 @@
-# Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT
+# Reducing False Negatives in the IDC Classifier
 ## Intel AI DevJam Demo GUI
 
-![Intel AI DevJam Demo GUI](../IDC-Classifier/Inception/images/IDC-Classification.jpg)
+![Intel AI DevJam Demo GUI](../images/IDC-Classification.jpg)
 
 ## Abstract
 
-The **Intel AI DevJam Demo** project provides the source codes and tutorials for setting up the project that will demonstrated at **Intel AI DevJam** at **ICML** (**International Conference on Machine Learning**) in **Sweden**, July 2018.
+The **Intel AI DevJam Demo** project, **Reducing False Negatives in the IDC Classifier**, provides the source codes and tutorials for setting up the project that will be demonstrated at **Intel AI DevJam** at **ICML** (**International Conference on Machine Learning**) in **Sweden**, July 2018.
 
-The **Intel® AI DevJam Demo GUI** uses a **Windows application** to communicate with a **facial recognition classifier** and a classifier trained to detect **Invasive Ductal Carcinoma (Breast cancer)** in **histology images**.
+The **Intel® AI DevJam Demo GUI** uses a **Windows application** to communicate with a **facial recognition classifier** and an option of two classifiers trained to detect **Invasive Ductal Carcinoma (Breast cancer)** in **histology images**. The project combines the  [Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT](https://github.com/iotJumpway/IoT-JumpWay-Intel-Examples/tree/master/Intel-Movidius/IDC-Classification "Invasive Ductal Carcinoma (IDC) Classification Using Computer Vision & IoT") and [TASS Movidius Facenet Classifier](https://github.com/iotJumpway/IoT-JumpWay-Intel-Examples/tree/master/Intel-Movidius/TASS/Facenet "TASS Movidius Facenet Classifier") projects, along with some new improvements.
 
-The goal of this project is to intentionally try to trick the model by using very similar, but opposite class, images from a small set of testing data that I believe humans may have difficulty telling apart. A larger set of testing data is also provided to compare how the model works on larger datasets. 
+The goal of this project is to intentionally try to trick the model by using very similar, but opposite class, images from a small set of testing data that I believe humans may have difficulty telling apart. A larger set of testing data is provided to compare how the model works on larger datasets. 
+
+if we find **false positives** we will attempt to find a way to reduce them, providing a safety net for incorrect classifications that could mean the difference between life and death.
 
 ## IoT Connectivity
 
