@@ -138,14 +138,15 @@ namespace IDC_Classifier_GUI
                     double recall = (double)identified / ((double)identified + (double)fns);
                     double fscore = 2 * (double)precision * (double)recall / ((double)precision + (double)recall);
 
-                    Speech.Speak(identified + " true positives, " + fps + " false positives, " + fns + " false negatives, " + tns + " true negatives, " + incorrect + " incorrect examples classified, " + accuracy + " accuracy, " + precision + " precision, " + recall + " recall, " + fscore + " fscore");
+                    Speech.Speak(identified + " true positives, " + fps + " false positives, " + fns + " false negatives, " + unsure + " unsure, " + tns + " true negatives, " + incorrect + " incorrect examples classified, " + Math.Round(accuracy, 2) + " accuracy, " + Math.Round(precision, 2) + " precision, " + Math.Round(recall, 2) + " recall, " + Math.Round(fscore, 2) + " fscore");
                 
                     Debug.WriteLine("- " + identified  + " true positives, " + fps + " false positives, " + fns + " false negatives, " + tns + " true negatives");
+                    Debug.WriteLine("- " + unsure + " unsure");
                     Debug.WriteLine("- " + incorrect + " incorrect examples classified");
-                    Debug.WriteLine("- " + accuracy + " accuracy");
-                    Debug.WriteLine("- " + precision + " precision");
-                    Debug.WriteLine("- " + recall + " recall");
-                    Debug.WriteLine("- " + fscore + " fscore");
+                    Debug.WriteLine("- " + Math.Round(accuracy, 2) + " accuracy");
+                    Debug.WriteLine("- " + Math.Round(precision, 2) + " precision");
+                    Debug.WriteLine("- " + Math.Round(recall, 2) + " recall");
+                    Debug.WriteLine("- " + Math.Round(fscore, 2) + " fscore");
                 }
                 System.Threading.Thread.Sleep(1000);
             }
