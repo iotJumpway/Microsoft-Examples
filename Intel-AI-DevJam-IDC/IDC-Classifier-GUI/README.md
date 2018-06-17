@@ -147,6 +147,12 @@ This was also tested using the [IDC Classifier Test Program](https://github.com/
 
 ![Testing The Universal Windows Application](images/will-farrell-chad-smith.jpg)
 
+## Things To Try
+
+- Test on a larger dataset
+- Train more similar examples of the misidentified images
+- Use a different model
+
 ## Testing On A Larger DataSet
 
 The second folder located in the **Data** folder can be used to test the classifier on 100 images, 50 negative and 50 positive. These images have been randomly selected and may or may not confuse similar images from seperate classes.
