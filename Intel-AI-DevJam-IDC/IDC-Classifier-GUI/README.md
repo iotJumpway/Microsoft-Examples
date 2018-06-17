@@ -145,6 +145,8 @@ You can see the images that were incorrectly classified along with images from o
 
 This was also tested using the [IDC Classifier Test Program](https://github.com/iotJumpway/IoT-JumpWay-Microsoft-Examples/blob/master/Intel-AI-DevJam-IDC/IDC-Classifier/Classifier.py "IDC Classifier Test Program") with the same outcome. It seems that similar to facial recognition, Inception V3 gets confused on similar images, this can be confirmed or not by testing larger datasets.
 
+![Testing The Universal Windows Application](images/will-farrell-chad-smith.jpg)
+
 ## Testing On A Larger DataSet
 
 The second folder located in the **Data** folder can be used to test the classifier on 100 images, 50 negative and 50 positive. These images have been randomly selected and may or may not confuse similar images from seperate classes. 
