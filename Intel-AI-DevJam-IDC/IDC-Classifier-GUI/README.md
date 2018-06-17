@@ -246,6 +246,8 @@ Processed image 100
 
 The above shows that on a dataset of 100 images there were 7 incorrect classifications all of which are **false negatives** with a **confidence of 0.90 or higher**. The application marked 16 images as **unsure** and **correctly** identified 27 of the 50 IDC positive images.
 
+![Testing The Universal Windows Application](images/Opposing-Classes-100.jpg) 
+
 ## False Negatives
 
 ```
@@ -368,8 +370,9 @@ Processed image 64
 {"Confidence": "0.851", "ResponseMessage": "IDC Not Detected With Confidence 0.851", "Response": "OK", "Results": 0}
 UNSURE: IDC not detected in image 66 8975_idx5_x1251_y1251_class1.png with 0.851 confidence.
 Processed image 66
-
 ```
+
+
 
 ## Get Involved 
 This project is open sourced under the MIT license. All contributions are welcome, you can choose from any of the features list below or submit your own features for review via a pull request. 
